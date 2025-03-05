@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-test.setTimeout(90000);
-
 test.use({
   viewport: {
     height: 1080,

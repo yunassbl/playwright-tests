@@ -26,4 +26,6 @@ test('test', async ({ page }) => {
   await expect(page.getByText('로그아웃하시겠습니까?')).toBeVisible();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
+  await expect(page.getByText('로그아웃되었습니다')).toBeVisible();
+  await expect(page.getByRole('img', { name: '고객을 관리하는 가장 좋은 선택 "UNO CRM"' })).toBeVisible();
 });

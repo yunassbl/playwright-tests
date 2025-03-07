@@ -31,7 +31,7 @@ test('test', async ({ page }) => {
   await expect(page1.getByRole('cell', { name: '접수', exact: true })).toBeVisible();
   await expect(page1.getByRole('cell', { name: '신 당일접수_확인 M' })).toBeVisible();
   await expect(page1.getByRole('cell', { name: '-05-05' })).toBeVisible();
-  await expect(page1.getByRole('cell', { name: ':00 Open' })).toBeVisible();
+  await expect(page1.getByRole('combobox', { name: '접수시간' })).toBeVisible();
   await expect(page1.getByRole('combobox', { name: '부서를 선택하세요' })).toBeVisible();
   // 당일접수 > 접수 진행
   await expect(page1.getByRole('button', { name: '접수' })).toBeVisible();

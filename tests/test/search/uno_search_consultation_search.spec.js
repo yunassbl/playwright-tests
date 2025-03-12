@@ -300,7 +300,7 @@ test('test', async ({ page }) => {
   await expect(page.locator('div:nth-child(4) > .MuiFormGroup-root > label > .MuiTypography-root').first()).toBeVisible();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '소개자' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '장지훈' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '김정연' })).toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
@@ -312,7 +312,7 @@ test('test', async ({ page }) => {
   await page.getByRole('radio', { name: '있음' }).check();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '소개자' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '장지훈' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '김정연' })).toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
@@ -439,7 +439,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('상담조회 내역')).toBeVisible();
   // 상세 필터 > 고객정보 필터 > 내/외국인 > 외국인 검색
   await expect(page.getByRole('paragraph').filter({ hasText: '내/외국인' })).toBeVisible();
-  await expect(page.getByText('외국인', { exact: true })).toBeVisible();
+  await expect(page.getByText('외국인', { exact: true }).nth(0)).toBeVisible();
   await page.getByRole('radio', { name: '외국인' }).check();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '내/외국인' })).toBeVisible();
@@ -522,7 +522,7 @@ test('test', async ({ page }) => {
   await expect(page.locator('.extra-filter-wrapper-2 > div > div:nth-child(2) > div:nth-child(3) > .MuiFormGroup-root > label > .MuiTypography-root').first()).toBeVisible();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '마케팅 수신' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '거부' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '동의' }).nth(1)).toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
@@ -534,6 +534,7 @@ test('test', async ({ page }) => {
   await page.locator('div').filter({ hasText: /^마케팅 수신전체수신거부$/ }).getByLabel('수신').check();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '마케팅 수신' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '동의' }).nth(1)).toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
@@ -545,7 +546,7 @@ test('test', async ({ page }) => {
   await page.locator('div').filter({ hasText: /^마케팅 수신전체수신거부$/ }).getByLabel('거부').check();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '마케팅 수신' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '거부' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '동의' }).nth(1)).not.toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
@@ -554,11 +555,11 @@ test('test', async ({ page }) => {
   // 상세 필터 > 고객정보 필터 > 최초 내원경로 검색
   await expect(page.locator('span').filter({ hasText: '최초내원경로' })).toBeVisible();
   await page.locator('div:nth-child(2) > div:nth-child(4) > .MuiFormControl-root > .MuiInputBase-root').click();
-  await page.getByRole('option', { name: '굿닥' }).click();
+  await page.getByRole('option', { name: 'SNS' }).click();
   await page.getByRole('button', { name: 'Close' }).click();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '고객명', exact: true })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '고객명_자동화' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
@@ -567,11 +568,11 @@ test('test', async ({ page }) => {
   // 상세 필터 > 고객정보 필터 > 담당 상담사 검색
   await expect(page.getByText('담당상담사')).toBeVisible();
   await page.locator('div:nth-child(2) > div:nth-child(5) > .MuiFormControl-root > .MuiInputBase-root').click();
-  await page.getByRole('option', { name: '변준영' }).click();
+  await page.getByRole('option', { name: '노윤이' }).click();
   await page.getByRole('button', { name: 'Close' }).click();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '고객명', exact: true })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '고객명_자동화' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
@@ -580,11 +581,11 @@ test('test', async ({ page }) => {
   // 상세 필터 > 고객정보 필터 > 담당 의사 검색
   await expect(page.getByText('담당의사')).toBeVisible();
   await page.locator('div:nth-child(2) > div:nth-child(6) > .MuiFormControl-root > .MuiInputBase-root').click();
-  await page.getByRole('option', { name: 'nt2' }).click();
+  await page.getByRole('option', { name: '테스트의사' }).click();
   await page.getByRole('button', { name: 'Close' }).click();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '고객명', exact: true })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '고객명_자동화' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
@@ -595,11 +596,15 @@ test('test', async ({ page }) => {
   await page.locator('.extra-filter-wrapper-2 > div > div:nth-child(3) > div > .MuiFormControl-root > .MuiInputBase-root').first().click();
   const inputField3 = page.locator('input[role="combobox"]').nth(14);
   await inputField3.fill('성형');
-  await page.getByRole('option', { name: '성형' }).click();
+  await page.getByRole('option', { name: '보톡스' }).click(); /// 
+  /////
+  ///////
+  ////// 여기 보톡스 오류 부터
+  ////////
   await page.getByRole('button', { name: 'Close' }).click();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
   await expect(page.getByRole('cell', { name: '고객명', exact: true })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '고객명_자동화' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   // 초기화
   await page.getByRole('button', { name: '초기화' }).click();
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();

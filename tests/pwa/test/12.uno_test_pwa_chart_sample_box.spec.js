@@ -61,7 +61,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('차트샘플함')).toBeVisible();
   await expect(page.getByText('폴더', { exact: true })).toBeVisible();
   await expect(page.getByText('자동화', { exact: true })).toBeVisible();
-  await expect(page.getByText('파일')).toBeVisible();
+  await expect(page.getByText('파일').nth(0)).toBeVisible();
   await expect(page.getByText('자동화_확인용.jpg')).toBeVisible();
   // 등록일 오래된 순
   await expect(page.locator('#orderby-drive-input')).toBeVisible();

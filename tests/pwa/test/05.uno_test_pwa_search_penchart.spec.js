@@ -35,12 +35,12 @@ test('test', async ({ page }) => {
   await page.waitForTimeout(2000);
   await expect(page.getByRole('textbox', { name: '고객명, 전화번호로 검색하세요' })).toBeVisible();
   await page.getByRole('textbox', { name: '고객명, 전화번호로 검색하세요' }).click();
-  await page.getByRole('textbox', { name: '고객명, 전화번호로 검색하세요' }).fill('자동화');
+  await page.getByRole('textbox', { name: '고객명, 전화번호로 검색하세요' }).fill('pwa_자동화');
   await expect(page.getByRole('button').nth(1)).toBeVisible();
   await page.getByRole('button').nth(1).click();
   await page.waitForTimeout(3000);
   await expect(page.getByRole('columnheader', { name: '고객명' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '고객명_자동화' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'pwa_자동화_' })).toBeVisible();
   // 펜차트 > 차트보기
   await expect(page.getByRole('columnheader', { name: '펜차트' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '차트보기' })).toBeVisible();
@@ -113,7 +113,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '조회' })).toBeVisible();
   await page.getByRole('button', { name: '조회' }).click();
   // 폴더 삭제
-  await expect(page.getByText('수정')).toBeVisible();
+  await expect(page.getByText('수정').nth(1)).toBeVisible();
   await expect(page.locator('div').filter({ hasText: /^폴더수정$/ }).getByRole('button')).toBeVisible();
   await page.locator('div').filter({ hasText: /^폴더수정$/ }).getByRole('button').click();
   await expect(page.getByRole('menuitem', { name: '삭제' })).toBeVisible();
@@ -122,7 +122,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('삭제하시겠습니까?')).toBeVisible();
   await page.getByRole('button', { name: '삭제' }).click();
   await expect(page.getByText('폴더를 삭제했습니다')).toBeVisible();
-  await expect(page.getByText('수정')).not.toBeVisible();
+  await expect(page.getByText('수정').nth(1)).not.toBeVisible();
   // 파일명 검색
   await expect(page.getByRole('textbox', { name: '폴더명, 파일명을 검색하세요' })).toBeVisible();
   await page.getByRole('textbox', { name: '폴더명, 파일명을 검색하세요' }).click();

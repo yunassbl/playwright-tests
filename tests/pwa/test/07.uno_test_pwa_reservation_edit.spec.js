@@ -46,21 +46,21 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('tab', { name: '내원정보' })).toBeVisible();
   await page.getByRole('tab', { name: '내원정보' }).click();
   await expect(page.getByRole('cell', { name: ':00 - 09:30' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '세부_일반형_1' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '상담사A2' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '예약 메모 입력 자동화' })).toBeVisible();
   await expect(page.getByText('예약 메모 입력 자동화')).toBeVisible();
   await page.getByText('예약 메모 입력 자동화').click();
   // 예약 정보 노출 확인
   await expect(page.locator('div').filter({ hasText: /^pwa_자동화_수정\(F\/만 30세\/940706\)$/ }).nth(1)).toBeVisible();
   await expect(page.getByText('상담예약')).toBeVisible();
-  await expect(page.getByText('파트')).toBeVisible();
+  await expect(page.getByText('상담').nth(18)).toBeVisible();
   await expect(page.getByText('시 00분')).toBeVisible();
   await expect(page.getByText('시간 30분')).toBeVisible();
   await expect(page.getByText('굿닥')).toBeVisible();
   await expect(page.getByText('이지혜')).toBeVisible();
-  await expect(page.getByText('김정연').first()).toBeVisible();
+  await expect(page.getByText('김정연').nth(2)).toBeVisible();
   await expect(page.getByText('nt2')).toBeVisible();
-  await expect(page.getByText('김정연').nth(1)).toBeVisible();
+  await expect(page.getByText('김정연').nth(3)).toBeVisible();
   await expect(page.getByText('성형-눈매교정')).toBeVisible();
   await expect(page.getByRole('paragraph')).toBeVisible();
   // 예약 수정
@@ -90,17 +90,17 @@ test('test', async ({ page }) => {
   await expect(page.locator('label').filter({ hasText: '방문시간' })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '방문시간을 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '방문시간을 선택하세요' }).click();
-  await page.getByRole('option', { name: '9:30' }).click();
+  await page.getByRole('option', { name: '9:30' }).nth(0).click();
   // 예상 소요시간
   await expect(page.locator('label').filter({ hasText: '예상 소요시간' })).toBeVisible();
   await expect(page.locator('div').filter({ hasText: /^시간분$/ }).nth(2)).toBeVisible();
   await page.locator('div').filter({ hasText: /^시간분$/ }).nth(2).click();
-  await page.getByRole('menuitem', { name: '1시간 0분' }).click();
+  await page.getByRole('menuitem', { name: '1시간 0분' }).nth(0).click();
   // 예약부서
   await expect(page.locator('label').filter({ hasText: '예약부서' })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '부서를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '부서를 선택하세요' }).click();
-  await page.getByRole('option', { name: '파트-세부_일반형_2' }).click();
+  await page.getByRole('option', { name: '상담-상담사B' }).click();
   // 내원경로
   await expect(page.locator('label').filter({ hasText: '내원경로' })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '내원경로를 선택하세요' })).toBeVisible();
@@ -110,7 +110,7 @@ test('test', async ({ page }) => {
   await expect(page.locator('label').filter({ hasText: '작성자' })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '작성자를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '작성자를 선택하세요' }).click();
-  await page.getByRole('option', { name: '이지혜' }).click();
+  await page.getByRole('option', { name: '이지혜' }).nth(0).click();
   // 의사
   await expect(page.locator('label').filter({ hasText: '의사' })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '의사를 선택하세요' })).toBeVisible();
@@ -160,13 +160,13 @@ test('test', async ({ page }) => {
   await expect(page.getByText('예약을 변경했습니다')).toBeVisible();
   // 예약 수정 확인
   await expect(page.getByText('진료예약')).toBeVisible();
-  await expect(page.getByText('파트')).toBeVisible();
+  await expect(page.getByText('상담').nth(17)).toBeVisible();
   const todayStrISO = today.toISOString().slice(5,10);
   await expect(page.locator('span').filter({ hasText: `-${todayStrISO}` })).toBeVisible();
   await expect(page.getByText('시 30분')).toBeVisible();
   await expect(page.getByText('시간 0분')).toBeVisible();
   await expect(page.getByText('SNS')).toBeVisible();
-  await expect(page.getByText('김정연')).toBeVisible();
+  await expect(page.getByText('김정연').nth(2)).toBeVisible();
   await expect(page.getByText('변준영')).toBeVisible();
   await expect(page.getByText('dev')).toBeVisible();
   await expect(page.getByText('이지혜')).toBeVisible();

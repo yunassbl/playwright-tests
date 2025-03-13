@@ -29,7 +29,7 @@ test('test', async ({ page }) => {
   // 고객등록
   await expect(page.getByRole('heading', { name: '고객등록' })).toBeVisible();
   // 차트번호
-  await expect(page.getByText('차트번호')).toBeVisible();
+  await expect(page.getByText('차트번호').nth(0)).toBeVisible();
   await expect(page.getByText('직접입력')).toBeVisible();
   await page.getByText('직접입력').click();
   await page.getByRole('textbox', { name: '고객 등록완료 시 자동발급' }).click();
@@ -119,7 +119,7 @@ test('test', async ({ page }) => {
   await addInfo3.fill('추가정보3 자동화');
   // 진료정보 > 담당상담사
   await expect(page.getByRole('dialog').getByText('담당상담사')).toBeVisible();
-  await expect(page.getByRole('combobox', { name: '상담사를 선택하세요' })).toBeVisible
+  await expect(page.getByRole('combobox', { name: '상담사를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '상담사를 선택하세요' }).click();
   await expect(page.getByRole('option', { name: '최지안' })).toBeVisible();
   await page.getByRole('option', { name: '최지안' }).click();
@@ -135,10 +135,14 @@ test('test', async ({ page }) => {
   await page.getByRole('combobox', { name: '관심항목을 선택하세요' }).click();
   await expect(page.getByRole('option', { name: '리프팅' })).toBeVisible();
   await page.getByRole('option', { name: '리프팅' }).click();
+  await page.waitForTimeout(2000);
   await expect(page.getByRole('option', { name: '보톡스' })).toBeVisible();
   await page.getByRole('option', { name: '보톡스' }).click();
+  await page.waitForTimeout(2000);
   await expect(page.getByRole('option', { name: '이관', exact: true })).toBeVisible();
   await page.getByRole('option', { name: '이관', exact: true }).click();
+  await page.waitForTimeout(2000);
+  await expect(page.getByRole('button', { name: 'Close' })).toBeVisible();
   await page.getByRole('button', { name: 'Close' }).click();
   // 진료정보 > 고객등급
   await expect(page.getByRole('dialog').getByText('고객등급')).toBeVisible();
@@ -146,6 +150,7 @@ test('test', async ({ page }) => {
   await page.getByRole('combobox', { name: '고객등급을 선택하세요' }).click();
   await expect(page.getByRole('option', { name: 'BEST' })).toBeVisible();
   await page.getByRole('option', { name: 'BEST' }).click();
+  await page.waitForTimeout(2000);
   // 진료정보 > 상세정보
   await expect(page.getByText('상세정보')).toBeVisible();
   // 상세정보 > 주소
@@ -160,12 +165,14 @@ test('test', async ({ page }) => {
   await page.getByRole('combobox', { name: '직업을 선택하세요' }).click();
   await expect(page.getByRole('option', { name: '전문특수직' })).toBeVisible();
   await page.getByRole('option', { name: '전문특수직' }).click();
+  await page.waitForTimeout(2000);
   // 상세정보 > 결혼여부
   await expect(page.getByRole('dialog').getByText('결혼여부')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '결혼 여부를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '결혼 여부를 선택하세요' }).click();
   await expect(page.getByRole('option', { name: '미혼' })).toBeVisible();
   await page.getByRole('option', { name: '미혼' }).click();
+  
   // 상세정보 > 국가/지역
   await expect(page.getByRole('dialog').getByText('국가/지역')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '국가/지역을 선택하세요' })).toBeVisible();
@@ -197,8 +204,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('combobox', { name: '가족관계를 등록하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '가족관계를 등록하세요' }).click();
   await page.getByRole('combobox', { name: '가족관계를 등록하세요' }).fill('김정연');
-  await expect(page.locator('div').filter({ hasText: /-8948-4318/ }).first()).toBeVisible();
-  await page.locator('div').filter({ hasText: /-8948-4318/ }).first().click();
+  await expect(page.locator('div').filter({ hasText: /-8989-8989/ }).first()).toBeVisible();
+  await page.locator('div').filter({ hasText: /-8989-8989/ }).first().click();
   // 진료정보 > 신체정보
   await expect(page.getByText('신체정보')).toBeVisible();
   await page.getByText('신체정보').click();
@@ -213,6 +220,7 @@ test('test', async ({ page }) => {
   await page.getByRole('combobox', { name: '혈액형' }).click();
   await expect(page.getByRole('option', { name: 'A', exact: true })).toBeVisible();
   await page.getByRole('option', { name: 'A', exact: true }).click();
+  await page.waitForTimeout(2000);
   // 신체정보 > 몸무게
   await expect(page.getByRole('dialog').getByText('몸무게')).toBeVisible();
   await expect(page.getByRole('textbox', { name: '몸무게를 입력하세요' })).toBeVisible();

@@ -38,9 +38,9 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   await page.getByRole('button', { name: '자동화_신규고객' }).click();
   // 통합차트
-  await expect(page.getByText('통합차트')).toBeVisible(); // 통합차트 진입
+  await expect(page.getByText('통합차트').nth(0)).toBeVisible(); // 통합차트 진입
   // 통합차트 > 접수 진입
-  await expect(page.getByText('통합차트')).toBeVisible();
+  await expect(page.getByText('통합차트').nth(0)).toBeVisible();
   await expect(page.getByText('접수 (0)')).toBeVisible();
   await page.getByText('접수 (0)').click();
   // 통합차트 > 접수 등록
@@ -50,7 +50,9 @@ test('test', async ({ page }) => {
   await expect(page.getByText('접수 등록')).toBeVisible();
   // 접수 종류
   await expect(page.locator('label').filter({ hasText: '접수종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
+  await expect(page.getByRole('combobox').nth(1)).toBeVisible();
+  await page.getByRole('combobox').nth(1).click();
+  // await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
   await page.getByRole('option', { name: '상담접수' }).click();
   // 접수 부서
   await expect(page.getByText('접수부서')).toBeVisible();
@@ -121,7 +123,9 @@ test('test', async ({ page }) => {
   await expect(page.getByText('접수 수정')).toBeVisible();
   // 접수 종류
   await expect(page.locator('label').filter({ hasText: '접수종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').first().click();
+  await expect(page.getByRole('combobox').nth(1)).toBeVisible();
+  await page.getByRole('combobox').nth(1).click();
+  // await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').first().click();
   await page.getByRole('option', { name: '진료접수' }).click();
   // 접수 부서
   await expect(page.getByText('접수부서')).toBeVisible();
@@ -160,15 +164,17 @@ test('test', async ({ page }) => {
   // 시/수술 카테고리 추가 버튼
   await page.getByRole('button', { name: '+', exact: true }).click();
   await page.getByRole('button', { name: '+', exact: true }).click();
-  await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .sc-hBtRBD > .sc-hYmls').click();
+  await expect(page.getByRole('button', { name: '-', exact: true }).nth(1)).toBeVisible();
+  await page.getByRole('button', { name: '-', exact: true }).nth(1).click();
   // 시/수술 카테고리 추가
   await expect(page.getByText('시/수술 카테고리')).toBeVisible();
-  await page.locator('.sc-fUBkdm > div:nth-child(2) > div > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
-  // await page.locator('[role="combobox"]').nth(22).click();
+  await expect(page.getByRole('combobox', { name: '시/수술 카테고리를 선택하세요' }).nth(1)).toBeVisible();
+  await page.getByRole('combobox', { name: '시/수술 카테고리를 선택하세요' }).nth(1).click();
   await page.getByRole('option', { name: '성형', exact: true }).click();
   // 시/수술명 추가
   await expect(page.locator('label').filter({ hasText: '시/수술명' })).toBeVisible();
-  await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .sc-hBtRBD > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await expect(page.getByRole('combobox', { name: '시/수술명을 선택하세요.' }).nth(1)).toBeVisible();
+  await page.getByRole('combobox', { name: '시/수술명을 선택하세요.' }).nth(1).click();
   await page.getByRole('option', { name: '눈매교정' }).click();
   // 접수 메모
   await expect(page.getByText('접수메모')).toBeVisible();

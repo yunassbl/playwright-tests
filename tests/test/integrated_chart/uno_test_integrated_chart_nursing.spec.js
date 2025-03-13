@@ -41,7 +41,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   await page.getByRole('button', { name: '자동화_신규고객' }).click();
   // 통합차트
-  await expect(page.getByText('통합차트')).toBeVisible();
+  await expect(page.getByText('통합차트').nth(0)).toBeVisible();
   // 간호차트
   await page.getByText('간호 (0)', { exact: true }).click();
   await expect(page.getByRole('button', { name: '+ 간호등록' })).toBeVisible();
@@ -140,18 +140,23 @@ test('test', async ({ page }) => {
   // 의사 수정
   await expect(page.locator('label').filter({ hasText: '의사' })).toBeVisible();
   await page.getByRole('combobox', { name: '의사를 선택하세요' }).click();
+  await page.waitForTimeout(2000);
+  await expect(page.getByRole('option', { name: '황범석' })).toBeVisible();
   await page.getByRole('option', { name: '황범석' }).click();
   // 간호사 수정
   await expect(page.locator('label').filter({ hasText: '간호사' })).toBeVisible();
   await page.getByRole('combobox', { name: '간호사를 선택하세요' }).click();
+  await expect(page.getByRole('option', { name: '최지안' })).toBeVisible();
   await page.getByRole('option', { name: '최지안' }).click();
   // 시/수술 카테고리 수정
   await expect(page.getByText('시/수술 카테고리')).toBeVisible();
   await page.getByRole('combobox', { name: '시/수술 카테고리를 선택하세요' }).click();
+  await expect(page.getByRole('option', { name: '피부 시술' })).toBeVisible();
   await page.getByRole('option', { name: '피부 시술' }).click();
   // 시/수술명 수정
   await expect(page.locator('label').filter({ hasText: '시/수술명' })).toBeVisible();
   await page.getByRole('combobox', { name: '시/수술명을 선택하세요' }).click();
+  await expect(page.getByRole('option', { name: '써마지' })).toBeVisible();
   await page.getByRole('option', { name: '써마지' }).click();
   // 시/수술 카테고리 추가 및 삭제
   await page.getByRole('button', { name: '+' }).nth(3).click();
@@ -160,10 +165,12 @@ test('test', async ({ page }) => {
   // 시/수술 카테고리 추가 
   await expect(page.getByText('시/수술 카테고리')).toBeVisible();
   await page.getByPlaceholder('시/수술 카테고리를 선택하세요.').nth(1).click();
+  await expect(page.getByRole('option', { name: '성형' }).nth(0)).toBeVisible();
   await page.getByRole('option', { name: '성형' }).nth(0).click();
   // 시/수술명 추가
   await expect(page.locator('label').filter({ hasText: '시/수술명' })).toBeVisible();
   await page.getByPlaceholder('시/수술명을 선택하세요.').nth(1).click();
+  await expect(page.getByRole('option', { name: '눈매교정' })).toBeVisible();
   await page.getByRole('option', { name: '눈매교정' }).click();
   // 바이탈 수정
   await expect(page.getByText('바이탈')).toBeVisible();
@@ -226,6 +233,7 @@ test('test', async ({ page }) => {
   // 투약 약품명 추가
   await expect(page.getByText('투약 약품명')).toBeVisible();
   await page.getByPlaceholder('투약 약품명을 선택하세요.').nth(1).click();
+  await expect(page.getByRole('option', { name: '우루사' })).toBeVisible();
   await page.getByRole('option', { name: '우루사' }).click();
   // 투약량 추가
   await expect(page.getByText('투약량')).toBeVisible();

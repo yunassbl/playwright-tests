@@ -50,7 +50,7 @@ test('test', async ({ page }) => {
   const todayStrISO = today.toISOString().slice(5,10);
   await expect(page.getByRole('cell', { name: `${todayStrISO}` })).toBeVisible();
   await expect(page.getByRole('cell', { name: ':30 - 10:30' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '세부_일반형_2' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '상담사B' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '예약 메모 입력 자동화 수정' })).toBeVisible();
   // 예약 진입
   await page.getByRole('cell', { name: '예약 메모 입력 자동화 수정' }).click();

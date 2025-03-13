@@ -92,9 +92,15 @@ test('test', async ({ page }) => {
   await expect(page.getByText('최초 내원경로 (최대 3')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '내원경로를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '내원경로를 선택하세요' }).click();
+  await expect(page.getByRole('option', { name: '굿닥' })).toBeVisible();
   await page.getByRole('option', { name: '굿닥' }).click();
+  await page.waitForTimeout(2000);
+  await expect(page.getByRole('option', { name: 'SNS' })).toBeVisible();
   await page.getByRole('option', { name: 'SNS' }).click();
+  await page.waitForTimeout(2000);
+  await expect(page.getByRole('option', { name: '병원홈페이지' })).toBeVisible();
   await page.getByRole('option', { name: '병원홈페이지' }).click();
+  await page.waitForTimeout(2000);
   await expect(page.getByRole('button', { name: 'Close' })).toBeVisible();
   await page.getByRole('button', { name: 'Close' }).click();
   // 소개자
@@ -146,9 +152,15 @@ test('test', async ({ page }) => {
   await expect(page.getByText('관심항목 (최대 3개)')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '관심항목을 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '관심항목을 선택하세요' }).click();
+  await expect(page.getByRole('option', { name: '성형' })).toBeVisible();
   await page.getByRole('option', { name: '성형' }).click();
+  await page.waitForTimeout(2000);
+  await expect(page.getByRole('option', { name: '피부 시술' })).toBeVisible();
   await page.getByRole('option', { name: '피부 시술' }).click();
+  await page.waitForTimeout(2000);
+  await expect(page.getByRole('option', { name: '리프팅' })).toBeVisible();
   await page.getByRole('option', { name: '리프팅' }).click();
+  await page.waitForTimeout(2000);
   await expect(page.getByRole('button', { name: 'Close' })).toBeVisible();
   await page.getByRole('button', { name: 'Close' }).click();
   // 고객등급

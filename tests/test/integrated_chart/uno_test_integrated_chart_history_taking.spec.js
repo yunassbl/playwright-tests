@@ -41,7 +41,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   await page.getByRole('button', { name: '자동화_신규고객' }).click();
   // 통합차트
-  await expect(page.getByText('통합차트')).toBeVisible();
+  await expect(page.getByText('통합차트').nth(0)).toBeVisible();
   await page.getByText('문진 (0)').click();
   await expect(page.getByRole('button', { name: '+ 문진등록' })).toBeVisible();
   // 문진 진입

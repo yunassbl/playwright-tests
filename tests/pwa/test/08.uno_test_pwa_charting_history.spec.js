@@ -56,7 +56,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('인모드')).toBeVisible();
   await expect(page.getByText('리프팅', { exact: true })).toBeVisible();
   await expect(page.getByText('실리프팅')).toBeVisible();
-  await expect(page.getByText('예약 메모 입력 자동화 수정').nth(1)).toBeVisible();
+  await expect(page.getByText('예약 메모 입력 자동화 수정').nth(0)).toBeVisible();
 
 
   

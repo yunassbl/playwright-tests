@@ -128,8 +128,10 @@ test('test', async ({ page }) => {
   await expect(page.getByText('접수 수정')).toBeVisible();
   // 접수종류
   await expect(page.locator('label').filter({ hasText: '접수종류' })).toBeVisible();
-  await expect(page.getByRole('combobox').nth(0)).toBeVisible();
-  await page.getByRole('combobox').nth(0).click();
+  // await expect(page.getByRole('combobox', { name: '-' })).toBeVisible();
+  // await page.getByRole('combobox', { name: '-' }).click();
+  await expect(page.getByRole('combobox').nth(1)).toBeVisible();
+  await page.getByRole('combobox').nth(1).click();
   await page.getByRole('option', { name: '진료접수' }).click();
   // 접수부서
   await expect(page.getByText('접수부서')).toBeVisible();

@@ -81,12 +81,12 @@ test('test', async ({ page }) => {
   // 배경 선택
   await page.locator('.MuiBackdrop-root').click();
   await expect(page.locator('div[type="APPOINTMENT"]').nth(0)).toBeVisible();
+  await expect(page.locator('div[type="APPOINTMENT"]').nth(1)).toBeVisible();
   await expect(page.locator('div[type="APPOINTMENT"]').nth(2)).toBeVisible();
+  await expect(page.locator('div[type="APPOINTMENT"]').nth(3)).toBeVisible();
   await expect(page.locator('div[type="APPOINTMENT"]').nth(4)).toBeVisible();
+  await expect(page.locator('div[type="APPOINTMENT"]').nth(5)).toBeVisible();
   await expect(page.locator('div[type="APPOINTMENT"]').nth(6)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(8)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(10)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(12)).toBeVisible();
   // 차팅이력 > 전체접기
   await expect(page.getByRole('button', { name: '전체 접기' })).toBeVisible();
   await page.getByRole('button', { name: '전체 접기' }).click();
@@ -95,7 +95,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '전체 펼치기' })).toBeVisible();
   await page.getByRole('button', { name: '전체 펼치기' }).click();
   await expect(page.getByRole('button', { name: '전체 접기' })).toBeVisible();
-  await expect(page.getByText('통합차트')).toBeVisible();
+  await expect(page.getByText('통합차트').nth(0)).toBeVisible();
   // 차팅이력 > 부서 선택 해제
   await page.getByRole('button', { name: '상담 - 상담사A2, 상담 - 상담사B' }).click();
   await page.waitForTimeout(1000);
@@ -122,7 +122,7 @@ test('test', async ({ page }) => {
   await page.waitForTimeout(1000);
   // 배경 선택
   await page.locator('.MuiBackdrop-root').click();
-  await expect(page.getByText('통합차트')).toBeVisible();
+  await expect(page.getByText('통합차트').nth(0)).toBeVisible();
 
 
 

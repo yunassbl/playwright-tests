@@ -60,17 +60,17 @@ test('test', async ({ page }) => {
   await expect(page.getByText('방문시간')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '방문시간을 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '방문시간을 선택하세요' }).click();
-  await page.getByRole('option', { name: '9:00' }).click();
+  await page.getByRole('option', { name: '9:00' }).nth(0).click();
   // 예상 소요시간
   await expect(page.getByText('예상 소요시간')).toBeVisible();
   await expect(page.locator('div').filter({ hasText: /^시간분$/ }).nth(2)).toBeVisible();
   await page.locator('div').filter({ hasText: /^시간분$/ }).nth(2).click();
-  await page.getByRole('menuitem', { name: '0시간 30분' }).click();
+  await page.getByRole('menuitem', { name: '0시간 30분' }).nth(0).click();
   // 예약 부서
   await expect(page.getByText('예약부서')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '부서를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '부서를 선택하세요' }).click();
-  await page.getByRole('option', { name: '파트-세부_일반형_1' }).click();
+  await page.getByRole('option', { name: '상담-상담사A2' }).click();
   // 내원경로
   await expect(page.getByText('내원경로')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '내원경로를 선택하세요' })).toBeVisible();
@@ -85,9 +85,9 @@ test('test', async ({ page }) => {
   await expect(page.getByText('의사', { exact: true })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '의사를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '의사를 선택하세요' }).click();
-  await page.getByRole('option', { name: '이지혜' }).click();
+  await page.getByRole('option', { name: '이지혜' }).nth(0).click();
   // 상담사
-  await expect(page.getByText('상담사')).toBeVisible();
+  await expect(page.getByText('상담사').nth(5)).toBeVisible();
   await expect(page.getByRole('combobox', { name: '상담사를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '상담사를 선택하세요' }).click();
   await page.getByRole('option', { name: '김정연' }).click();

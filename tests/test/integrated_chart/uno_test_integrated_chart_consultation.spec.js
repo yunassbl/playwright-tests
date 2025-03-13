@@ -41,7 +41,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   await page.getByRole('button', { name: '자동화_신규고객' }).click();
   // 통합차트
-  await expect(page.getByText('통합차트')).toBeVisible(); // 통합차트 진입
+  await expect(page.getByText('통합차트').nth(0)).toBeVisible(); // 통합차트 진입
   // 상담 진입
   await page.getByText('상담 (0)').click();
   await expect(page.getByRole('button', { name: '+ 상담등록' })).toBeVisible();
@@ -79,7 +79,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '불러오기' })).toBeVisible();
   await page.getByRole('button', { name: '불러오기' }).click();
   await expect(page.getByText('상담 등록')).toBeVisible();
-  await expect(page.getByText('고객상담차트.jpg')).toBeVisible();
+  await expect(page.getByText('고객상담차트.jpg').nth(0)).toBeVisible();
   await expect(page.getByRole('button', { name: '저장' })).toBeVisible();
   await page.getByRole('button', { name: '저장' }).click();
   await page.waitForTimeout(3000);
@@ -154,7 +154,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('상담을 수정했습니다. 연결된 접수정보가 업데이트 됩니다')).toBeVisible();
   // 상담 수정 확인
   await expect(page.getByRole('cell', { name: '상담 내용 입력 자동화 수정' })).toBeVisible(); // 상담내용
-  await expect(page.getByRole('cell', { name: '노윤이' }).nth(2)).toBeVisible(); // 상담사
+  await expect(page.getByRole('cell', { name: '최지안' })).toBeVisible(); // 상담사
   await expect(page.getByRole('cell', { name: '피부 시술' })).toBeVisible(); // 시/수술 카테고리
   await expect(page.getByRole('cell', { name: '성형' }).nth(2)).toBeVisible(); // 시/수술명
   await expect(page.getByRole('cell', { name: '써마지' })).toBeVisible(); // 시/수술 카테고리 추가

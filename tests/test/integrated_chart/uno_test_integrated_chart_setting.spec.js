@@ -51,6 +51,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('핀 고정시 해당 메뉴가 기본으로 노출됩니다')).toBeVisible();
   // 문진 체크 해제
   await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(13).click();
+  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(13).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();

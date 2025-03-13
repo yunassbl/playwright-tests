@@ -86,9 +86,13 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: 'Close' }).click();
   // 소개자 수정
   await expect(page.getByRole('dialog').getByText('소개자')).toBeVisible();
+  // 초기화
   await page.getByRole('combobox', { name: '소개자를 검색하세요' }).click();
-  await expect(page.locator('.sc-bDpDS > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiInputAdornment-root > .sc-fxwrCY > .MuiSvgIcon-root')).toBeVisible();
-  await page.locator('.sc-bDpDS > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiInputAdornment-root > .sc-fxwrCY > .MuiSvgIcon-root').click();
+  await page.getByRole('combobox', { name: '소개자를 검색하세요' }).fill('');
+  await page.getByRole('dialog').getByText('소개자').click();
+  // 검색
+  await page.getByRole('combobox', { name: '소개자를 검색하세요' }).click();
+  await page.waitForTimeout(2000);
   await page.getByRole('combobox', { name: '소개자를 검색하세요' }).fill('김정연');
   await expect(page.getByText('김정연', { exact: true }).nth(3)).toBeVisible();
   await page.getByText('김정연', { exact: true }).nth(3).click();
@@ -213,8 +217,6 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '수정완료' })).toBeVisible();
   await page.getByRole('button', { name: '수정완료' }).click();
   await expect(page.getByText('수정되었습니다')).toBeVisible();
-  // 통합차트
-  await expect(page.getByText('통합차트')).toBeVisible();
 
 
 

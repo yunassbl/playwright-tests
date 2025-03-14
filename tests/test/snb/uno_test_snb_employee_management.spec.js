@@ -47,6 +47,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('이메일(ID)')).toBeVisible();
   await expect(page.getByRole('textbox', { name: '이메일(ID)를 입력하세요' })).toBeVisible();
   await page.getByRole('textbox', { name: '이메일(ID)를 입력하세요' }).click();
+  await page.waitForTimeout(2000);
   await page.getByRole('textbox', { name: '이메일(ID)를 입력하세요' }).fill('autotest@test.com');
   await page.waitForTimeout(2000);
   // 임시 비밀번호
@@ -95,6 +96,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   // 메뉴 권한 설정
+  await page.waitForTimeout(3000);
   await expect(page.getByText('메뉴 권한 설정')).toBeVisible();
   // 현황판
   await expect(page.getByText('현황판').nth(1)).toBeVisible();
@@ -263,6 +265,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '설정', exact: true })).toBeVisible();
   await page.getByRole('button', { name: '설정', exact: true }).click();
   await expect(page.getByText('메뉴 권한 설정')).toBeVisible();
+  await page.waitForTimeout(3000);
   // 현황판
   await expect(page.getByText('현황판').nth(1)).toBeVisible();
   await expect(page.locator('.PrivateSwitchBase-input').first()).toBeVisible();

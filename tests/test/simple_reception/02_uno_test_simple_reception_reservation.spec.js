@@ -43,7 +43,8 @@ test('test', async ({ page }) => {
   await expect(page.getByText('예약 등록')).toBeVisible();
   // 예약 종류
   await expect(page.locator('label').filter({ hasText: '예약종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click(); 
+  await expect(page.getByRole('combobox').nth(0)).toBeVisible();
+  await page.getByRole('combobox').nth(0).click();
   await expect(page.getByRole('option', { name: '상담예약' })).toBeVisible();
   await page.getByRole('option', { name: '상담예약' }).click();
   // 예약 부서 

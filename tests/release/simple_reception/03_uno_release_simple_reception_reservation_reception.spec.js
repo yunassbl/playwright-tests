@@ -14,12 +14,15 @@ test('test', async ({ page }) => {
   // 로그인
   await expect(page.getByRole('img', { name: '고객을 관리하는 가장 좋은 선택 "UNO CRM"' })).toBeVisible();
   await page.getByRole('textbox', { name: '이메일' }).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('textbox', { name: '이메일' }).fill('simple@test.com');
   await expect(page.getByRole('textbox', { name: '●●●●●●●●' })).toBeVisible();
   await page.getByRole('textbox', { name: '●●●●●●●●' }).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('textbox', { name: '●●●●●●●●' }).fill('simp2024$$');
   await expect(page.getByRole('button', { name: '로그인' })).toBeVisible();
   await page.getByRole('button', { name: '로그인' }).click();
+  await page.waitForTimeout(1000);
   // 화면 진입
   await expect(page.getByText('전화번호로 접수를 시작합니다')).toBeVisible();
   // 휴대폰 번호 입력

@@ -111,14 +111,12 @@ test('test', async ({ page }) => {
   // 전체공지 고정
   await expect(page.getByText('전체공지 작성 자동화')).toBeVisible();
   await page.getByText('전체공지 작성 자동화').hover();
-  await page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(4).waitFor();
-  await page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(4).click();
+  await page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(5).click();
   // 전체공지 고정 확인
   await expect(page.getByText('전체공지 작성 자동화 수정')).toBeVisible();
   // 전체공지 삭제
   await expect(page.getByText('전체공지 작성 자동화')).toBeVisible();
   await page.getByText('전체공지 작성 자동화').hover();
-  await page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(4).waitFor();
   await page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(4).click();
   // 전체공지 삭제 안내 팝업
   await expect(page.getByText('게시글을 삭제하시겠습니까?')).toBeVisible();

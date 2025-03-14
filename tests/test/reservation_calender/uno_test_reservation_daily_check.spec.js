@@ -44,17 +44,18 @@ test('test', async ({ page }) => {
   await expect(page.getByText('예약 등록')).toBeVisible();
   // 예약 종류
   await expect(page.locator('label').filter({ hasText: '예약종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click(); 
+  await expect(page.getByRole('combobox').nth(0)).toBeVisible();
+  await page.getByRole('combobox').nth(0).click();
   await page.getByRole('option', { name: '상담예약' }).click();
   // 예약 부서 
   await expect(page.getByText('예약부서')).toBeVisible();
-  await page.locator('div:nth-child(2) > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
+  await page.getByRole('combobox', { name: '부서를 선택하세요' }).click();
   await expect(page.getByRole('option', { name: '상담-상담사A2' })).toBeVisible();
   await page.getByRole('option', { name: '상담-상담사A2' }).click();
   await page.waitForTimeout(3000);
   // 방문 시간 선택
   await expect(page.getByText('방문시간')).toBeVisible();
-  await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await page.getByRole('combobox', { name: '-' }).click();
   await page.getByRole('option', { name: '9:00' }).nth(0).click();
   ///// 날짜 선택
   const today = new Date();
@@ -81,31 +82,31 @@ test('test', async ({ page }) => {
   await page.getByRole('menuitem', { name: '1시간 0분' }).nth(0).click();
   // 내원경로
   await expect(page.locator('label').filter({ hasText: '내원경로' })).toBeVisible();
-  await page.locator('div:nth-child(3) > div:nth-child(2) > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await page.getByRole('combobox', { name: '내원경로를 선택하세요' }).click();
   await page.getByRole('option', { name: '굿닥', exact: true }).click();
   // 의사
   await expect(page.locator('label').filter({ hasText: '의사' })).toBeVisible();
-  await page.locator('div:nth-child(4) > div > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
+  await page.getByRole('combobox', { name: '의사를 선택하세요' }).click();
   await page.getByRole('option', { name: '최지안' }).click();
   // 상담사
   await expect(page.locator('label').filter({ hasText: '상담사' })).toBeVisible();
-  await page.locator('div:nth-child(4) > div:nth-child(2) > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await page.getByRole('combobox', { name: '상담사를 선택하세요' }).click();
   await page.getByRole('option', { name: '노윤이' }).click();
   // 어시스트
   await expect(page.locator('label').filter({ hasText: '어시스트' })).toBeVisible();
-  await page.locator('div:nth-child(5) > div > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
+  await page.getByRole('combobox', { name: '어시스트를 선택하세요' }).click();
   await page.getByRole('option', { name: '홍명희' }).click();
   // 작성자
   await expect(page.locator('label').filter({ hasText: '작성자' })).toBeVisible();
-  await page.locator('div:nth-child(5) > div:nth-child(2) > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await page.getByRole('combobox', { name: '작성자를 선택하세요' }).click();
   await page.getByRole('option', { name: 'dev' }).click();
   // 시/수술 카테고리
   await expect(page.getByText('시/수술 카테고리')).toBeVisible();
-  await page.locator('.sc-fUBkdm > .sc-iXzfSG > div > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await page.getByRole('combobox', { name: '시/수술 카테고리를 선택하세요' }).click();
   await page.getByRole('option', { name: '보톡스', exact: true }).click();
   // 시/수술명
   await expect(page.locator('label').filter({ hasText: '시/수술명' })).toBeVisible();
-  await page.locator('.sc-hBtRBD > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await page.getByRole('combobox', { name: '시/수술명을 선택하세요' }).click();
   await page.getByRole('option', { name: '필러' }).click();
   // 예약 메모
   await expect(page.getByText('예약메모')).toBeVisible();

@@ -26,33 +26,43 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '로그아웃' })).toBeVisible();
   await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
   await page.getByRole('button', { name: '고객 조회' }).click();
+  await page.waitForTimeout(1000);
   // 고객 조회 진입
   await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
   await page.getByRole('button', { name: '고객 조회' }).click();
+  await page.waitForTimeout(1000);
   // 고객 조회
   await expect(page.getByText('고객조회 내역')).toBeVisible();
   await expect(page.getByRole('paragraph').filter({ hasText: '고객명' })).toBeVisible();
   await page.getByRole('textbox', { name: '고객명', exact: true }).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('textbox', { name: '고객명', exact: true }).fill('자동화');
+  await page.waitForTimeout(1000);
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
+  await page.waitForTimeout(1000);
   await expect(page.getByText('고객조회 내역')).toBeVisible();
   await expect(page.getByRole('cell', { name: '고객명' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   await page.getByRole('button', { name: '자동화_신규고객' }).click();
+  await page.waitForTimeout(1000);
   // 통합차트
   await expect(page.getByText('통합차트')).toBeVisible();
   await page.getByText('문진 (0)').click();
+  await page.waitForTimeout(1000);
   await expect(page.getByRole('button', { name: '+ 문진등록' })).toBeVisible();
   // 문진 진입
   await expect(page.getByRole('button', { name: '+ 문진등록' })).toBeVisible();
   await page.getByRole('button', { name: '+ 문진등록' }).click();
+  await page.waitForTimeout(1000);
   // 문진 선택
   await expect(page.getByRole('heading', { name: '문진 선택' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '문진 자동화' })).toBeVisible();
   await page.getByRole('row', { name: '문진 자동화' }).getByRole('cell').nth(1).click();
+  await page.waitForTimeout(1000);
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
+  await page.waitForTimeout(1000);
   // 문진 등록
   await expect(page.getByRole('heading', { name: '문진 자동화' })).toBeVisible();
   await expect(page.getByRole('heading', { level: 2 }).nth(0)).toHaveText(/^문진 등록/);
@@ -63,7 +73,9 @@ test('test', async ({ page }) => {
   // 질문1
   await expect(page.getByRole('heading', { name: '주관식 질문*' })).toBeVisible();
   await page.getByRole('textbox', { name: '답변 입력란' }).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('textbox', { name: '답변 입력란' }).fill('주관식 답변 자동화');
+  await page.waitForTimeout(1000);
   // 질문2
   await expect(page.getByRole('heading', { name: '객관식 1건 선택*' })).toBeVisible();
   await expect(page.getByRole('radiogroup').getByText('항목1')).toBeVisible();

@@ -26,20 +26,25 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '로그아웃' })).toBeVisible();
   await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
   await page.getByRole('button', { name: '고객 조회' }).click();
+  await page.waitForTimeout(1000);
   // 고객 조회 진입
   await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
   await page.getByRole('button', { name: '고객 조회' }).click();
+  await page.waitForTimeout(1000);
   // 고객 조회
   await expect(page.getByText('고객조회 내역')).toBeVisible();
   await expect(page.getByRole('paragraph').filter({ hasText: '고객명' })).toBeVisible();
   await page.getByRole('textbox', { name: '고객명', exact: true }).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('textbox', { name: '고객명', exact: true }).fill('차팅이력');
   await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
+  await page.waitForTimeout(1000);
   await expect(page.getByText('고객조회 내역')).toBeVisible();
   await expect(page.getByRole('cell', { name: '고객명' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '차팅이력_확인용' })).toBeVisible();
   await page.getByRole('button', { name: '차팅이력_확인용' }).click();
+  await page.waitForTimeout(1000);
   // 통합차트
   await expect(page.getByText('통합차트')).toBeVisible();
   // 차팅이력
@@ -48,19 +53,25 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: '부서선택' }).click();
   await expect(page.getByRole('option', { name: '상담 - 상담사A2' })).toBeVisible();
   await page.getByRole('option', { name: '상담 - 상담사A2' }).click();
+  await page.waitForTimeout(1000);
   // 배경 선택
   await page.locator('.MuiBackdrop-root').click();
+  await page.waitForTimeout(1000);
   // 부서선택 확인
   await expect(page.locator('#chartItemsDiv').getByText('예약').first()).toBeVisible();
   // 차팅이력 > 부서선택
+  await expect(page.getByRole('button', { name: '상담 - 상담사A2' })).toBeVisible();
   await page.getByRole('button', { name: '상담 - 상담사A2' }).click();
+  await page.waitForTimeout(1000);
   await expect(page.getByRole('option', { name: '상담 - 상담사B' })).toBeVisible();
   await page.getByRole('option', { name: '상담 - 상담사B' }).click();
+  await page.waitForTimeout(1000);
   // 배경 선택
   await page.locator('.MuiBackdrop-root').click();
   await expect(page.locator('#chartItemsDiv').getByText('예약').first()).toBeVisible();
   await expect(page.locator('#chartItemsDiv').getByText('예약').nth(2)).toBeVisible();
   // 차팅이력 > 부서선택
+  await expect(page.getByRole('button', { name: '상담 - 상담사B, 상담 - 상담사A2' })).toBeVisible();
   await page.getByRole('button', { name: '상담 - 상담사B, 상담 - 상담사A2' }).click();
   await page.waitForTimeout(1000);
   await expect(page.getByRole('option', { name: '상담 - 상담사C' })).toBeVisible();
@@ -90,10 +101,12 @@ test('test', async ({ page }) => {
   // 차팅이력 > 전체접기
   await expect(page.getByRole('button', { name: '전체 접기' })).toBeVisible();
   await page.getByRole('button', { name: '전체 접기' }).click();
+  await page.waitForTimeout(1000);
   await expect(page.getByRole('button', { name: '전체 펼치기' })).toBeVisible();
   // 차팅이력 > 전체접기 > 전체 펼치기
   await expect(page.getByRole('button', { name: '전체 펼치기' })).toBeVisible();
   await page.getByRole('button', { name: '전체 펼치기' }).click();
+  await page.waitForTimeout(1000);
   await expect(page.getByRole('button', { name: '전체 접기' })).toBeVisible();
   await expect(page.getByText('통합차트')).toBeVisible();
   // 차팅이력 > 부서 선택 해제
@@ -122,6 +135,7 @@ test('test', async ({ page }) => {
   await page.waitForTimeout(1000);
   // 배경 선택
   await page.locator('.MuiBackdrop-root').click();
+  await page.waitForTimeout(1000);
   await expect(page.getByText('통합차트')).toBeVisible();
 
 

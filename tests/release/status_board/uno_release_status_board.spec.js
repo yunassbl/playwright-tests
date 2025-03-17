@@ -14,34 +14,47 @@ test('test', async ({ page }) => {
   // 로그인
   await expect(page.getByRole('img', { name: '고객을 관리하는 가장 좋은 선택 "UNO CRM"' })).toBeVisible();
   await page.getByRole('textbox', { name: '아이디(이메일)를 입력하세요' }).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('textbox', { name: '아이디(이메일)를 입력하세요' }).fill('jwpark@v2test.com');
   await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).fill('unoc2024$$');
   await expect(page.getByRole('button', { name: '로그인' })).toBeVisible();
   await page.getByRole('button', { name: '로그인' }).click();
+  await page.waitForTimeout(1000);
   // 메인 화면 진입
   await expect(page.getByRole('button', { name: '로그아웃' })).toBeVisible();
   // 고객 조회
   await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
   await page.getByRole('button', { name: '고객 조회' }).click();
+  await page.waitForTimeout(1000);
   // 통합차트
   await expect(page.getByText('고객조회 내역')).toBeVisible();
   await page.getByRole('textbox', { name: '고객명', exact: true }).click();
+  await page.waitForTimeout(1000);
   await page.getByRole('textbox', { name: '고객명', exact: true }).fill('자동화');
+  await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
   await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
+  await page.waitForTimeout(1000);
   await expect(page.getByRole('cell', { name: '고객명' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   await page.getByRole('button', { name: '자동화_신규고객' }).click();
+  await page.waitForTimeout(1000);
   // 예약 진입
   await expect(page.getByText('통합차트')).toBeVisible();
   await page.getByText('예약 (0)').click();
+  await page.waitForTimeout(1000);
   await expect(page.getByRole('cell', { name: '등록된 내용이 없습니다' })).toBeVisible();
   // 예약 등록
+  await expect(page.getByRole('button', { name: '+ 예약등록' })).toBeVisible();
   await page.getByRole('button', { name: '+ 예약등록' }).click();
+  await page.waitForTimeout(1000);
   await expect(page.getByText('예약 등록')).toBeVisible();
   // 예약 종류
   await expect(page.locator('label').filter({ hasText: '예약종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click(); 
+  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
+  await page.waitForTimeout(1000);
+  await expect(page.getByRole('option', { name: '상담예약' })).toBeVisible(); 
   await page.getByRole('option', { name: '상담예약' }).click();
   // 예약 부서 
   await expect(page.getByText('예약부서')).toBeVisible();

@@ -41,7 +41,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('예약 등록')).toBeVisible();
   // 예약 종류
   await expect(page.locator('label').filter({ hasText: '예약종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click(); 
+  await page.getByRole('combobox').nth(1).click();
   await page.getByRole('option', { name: '상담예약' }).click();
   // 예약 부서 
   await expect(page.getByText('예약부서')).toBeVisible();
@@ -109,7 +109,8 @@ test('test', async ({ page }) => {
   await expect(page.getByText('예약 수정')).toBeVisible();
   // 예약 종류 수정
   await expect(page.locator('label').filter({ hasText: '예약종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
+  await page.getByRole('combobox').nth(1).click();
+  // await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
   await page.getByRole('option', { name: '진료예약' }).click();
   // 예약 부서 수정
   await expect(page.getByText('예약부서')).toBeVisible();
@@ -149,11 +150,13 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: '-', exact: true }).nth(1).click();
   // 시/수술 카테고리 추가
   await expect(page.getByText('시/수술 카테고리')).toBeVisible();
-  await page.locator('.sc-fUBkdm > div:nth-child(2) > div > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+  // await page.locator('.sc-fUBkdm > div:nth-child(2) > div > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+  await page.getByRole('combobox', { name: '시/수술 카테고리를 선택하세요' }).nth(1).click();
   await page.getByRole('option', { name: '피부 시술' }).click();
   // 시/수술명 추가
   await expect(page.locator('label').filter({ hasText: '시/수술명' })).toBeVisible();
-  await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .sc-hBtRBD > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+  // await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .sc-hBtRBD > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+  await page.getByRole('combobox', { name: '시/수술명을 선택하세요' }).nth(1).click();
   await page.getByRole('option', { name: '인모드' }).click();
   // 예약 메모 수정
   await expect(page.getByText('예약메모')).toBeVisible();

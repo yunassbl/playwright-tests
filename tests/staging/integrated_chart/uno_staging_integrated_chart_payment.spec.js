@@ -147,8 +147,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '(45,455)' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '(100,000)' })).toBeVisible();
   await expect(page.locator('div:nth-child(2) > .sc-hmdomO > .sc-bXCLTC > tr > td:nth-child(11)')).toBeVisible();
-  await expect(page.locator('tr:nth-child(2) > td:nth-child(6)')).toBeVisible();
-  await expect(page.locator('tr:nth-child(3) > td:nth-child(6)')).toBeVisible();
+  await expect(page.locator('tr:nth-child(2) > td:nth-child(6)').nth(1)).toBeVisible();
+  await expect(page.locator('tr:nth-child(3) > td:nth-child(6)').nth(0)).toBeVisible();
   await expect(page.getByRole('cell', { name: '800,000' })).toBeVisible(); // 청구액
   await expect(page.locator('div:nth-child(2) > .sc-hmdomO > .sc-bXCLTC > tr > td:nth-child(13)')).toBeVisible();
   await expect(page.locator('div:nth-child(2) > .sc-hmdomO > .sc-bXCLTC > tr > td:nth-child(14)')).toBeVisible();

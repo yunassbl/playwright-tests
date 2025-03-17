@@ -141,12 +141,12 @@ test('test', async ({ page }) => {
   await expect(page.getByText('담당상담사')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '상담사를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '상담사를 선택하세요' }).click();
-  await page.getByRole('option', { name: '김정연' }).click();
+  await page.getByRole('option', { name: '김정연' }).nth(0).click();
   // 담당의사
   await expect(page.getByText('담당의사')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '의사를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '의사를 선택하세요' }).click();
-  await page.getByRole('option', { name: '김정연' }).click();
+  await page.getByRole('option', { name: '김정연' }).nth(0).click();
   // 관심항목
   await expect(page.getByText('관심항목 (최대 3개)')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '관심항목을 선택하세요' })).toBeVisible();

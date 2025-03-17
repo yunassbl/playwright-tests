@@ -128,7 +128,7 @@ test('test', async ({ page }) => {
   // 간호차트 등록 확인
   await expect(page.getByRole('cell', { name: '최지안' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '홍명희' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '눈매교정' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '간호내용 입력 자동화' })).toBeVisible();
   await expect(page.locator('div:nth-child(2) > .sc-hmdomO > .sc-bXCLTC > .sc-jsJBEP > td:nth-child(2)')).toBeVisible();
@@ -241,7 +241,7 @@ test('test', async ({ page }) => {
   // 간호 수정 확인
   await expect(page.getByRole('cell', { name: '황범석' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '최지안' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '피부 시술' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '눈매교정' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '써마지' })).toBeVisible(); // 시/수술명 추가

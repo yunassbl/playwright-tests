@@ -80,7 +80,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('작성자')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '작성자를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '작성자를 선택하세요' }).click();
-  await page.getByRole('option', { name: '김정연' }).click();
+  await page.getByRole('option', { name: '김정연' }).nth(0).click();
   // 의사
   await expect(page.getByText('의사', { exact: true })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '의사를 선택하세요' })).toBeVisible();
@@ -90,7 +90,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('상담사').nth(4)).toBeVisible();
   await expect(page.getByRole('combobox', { name: '상담사를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '상담사를 선택하세요' }).click();
-  await page.getByRole('option', { name: '김정연' }).click();
+  await page.getByRole('option', { name: '김정연' }).nth(0).click();
   // 어시스트
   await expect(page.getByText('어시스트')).toBeVisible();
   await expect(page.getByRole('combobox', { name: '어시스트를 선택하세요' })).toBeVisible();

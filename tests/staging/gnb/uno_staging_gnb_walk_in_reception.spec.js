@@ -33,8 +33,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '고객명' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   await expect(page.locator('th').filter({ hasText: '접수' })).toBeVisible();
-  await expect(page.getByRole('button', { name: '접수' })).toBeVisible();
-  await page.getByRole('button', { name: '접수' }).click();
+  await expect(page.getByRole('button', { name: '접수' }).nth(1)).toBeVisible();
+  await page.getByRole('button', { name: '접수' }).nth(1).click();
   await expect(page.getByText('오늘 예약이 없는 고객입니다.접수하시겠습니까?')).toBeVisible();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
@@ -127,7 +127,7 @@ test('test', async ({ page }) => {
   // 접수종류
   await expect(page.locator('label').filter({ hasText: '접수종류' })).toBeVisible();
   await expect(page.getByRole('combobox').nth(0)).toBeVisible();
-  await page.getByRole('combobox').nth(0).click();
+  await page.getByRole('combobox').nth(1).click();
   await page.getByRole('option', { name: '진료접수' }).click();
   // 접수부서
   await expect(page.getByText('접수부서')).toBeVisible();
@@ -214,7 +214,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '최지안' })).toBeVisible();
   await expect(page.getByRole('cell', { name: 'SNS', exact: true })).toBeVisible();
   await expect(page.getByRole('cell', { name: '피부 시술' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '인모드' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '눈매교정' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '노윤이' }).nth(2)).toBeVisible();

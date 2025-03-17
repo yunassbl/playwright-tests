@@ -86,7 +86,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('상담차트 (1)')).toBeVisible();
   await expect(page.getByRole('cell', { name: '상담 내용 입력 자동화' })).toBeVisible(); // 상담 내용
   await expect(page.getByRole('cell', { name: '최지안' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '눈매교정' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '해피콜' })).toBeVisible(); // 상담결과
   await expect(page.getByRole('cell', { name: '건' })).toBeVisible(); // 펜차트
@@ -154,7 +154,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '상담 내용 입력 자동화 수정' })).toBeVisible(); // 상담내용
   await expect(page.getByRole('cell', { name: '노윤이' }).nth(2)).toBeVisible(); // 상담사
   await expect(page.getByRole('cell', { name: '피부 시술' })).toBeVisible(); // 시/수술 카테고리
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible(); // 시/수술명
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible(); // 시/수술명
   await expect(page.getByRole('cell', { name: '써마지' })).toBeVisible(); // 시/수술 카테고리 추가
   await expect(page.getByRole('cell', { name: '눈수술' })).toBeVisible(); // 시/수술명 추가
   await expect(page.getByRole('cell', { name: '환불' })).toBeVisible(); // 상담결과

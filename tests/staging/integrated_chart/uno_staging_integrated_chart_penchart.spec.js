@@ -208,7 +208,7 @@ test('test', async ({ page }) => {
   // 취소
   await expect(page.getByRole('button', { name: '취소' })).toBeVisible();
   await page.getByRole('button', { name: '취소' }).click();
-  await expect(page.getByText('자동화 샘플.jpg')).toBeVisible();
+  await expect(page.getByText('자동화 샘플.jpg').nth(0)).toBeVisible();
   // 이미지 삭제
   await page.locator('div').filter({ hasText: /^자동화 샘플\.jpg$/ }).locator('div').nth(1).click({
     button: 'right'

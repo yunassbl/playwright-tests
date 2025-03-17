@@ -115,7 +115,7 @@ test('test', async ({ page }) => {
   await expect(page.locator('label').filter({ hasText: '의사' })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '의사를 선택하세요' })).toBeVisible();
   await page.getByRole('combobox', { name: '의사를 선택하세요' }).click();
-  await page.getByRole('option', { name: '김정연' }).click();
+  await page.getByRole('option', { name: '김정연' }).nth(0).click();
   // 상담사
   await expect(page.locator('label').filter({ hasText: '상담사' })).toBeVisible();
   await expect(page.getByRole('combobox', { name: '상담사를 선택하세요' })).toBeVisible();
@@ -166,7 +166,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('시 30분')).toBeVisible();
   await expect(page.getByText('시간 0분')).toBeVisible();
   await expect(page.getByText('SNS')).toBeVisible();
-  await expect(page.getByText('김정연')).toBeVisible();
+  await expect(page.getByText('김정연').nth(1)).toBeVisible();
   await expect(page.getByText('변준영')).toBeVisible();
   await expect(page.getByText('dev')).toBeVisible();
   await expect(page.getByText('이지혜')).toBeVisible();

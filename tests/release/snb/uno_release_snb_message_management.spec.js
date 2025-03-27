@@ -142,8 +142,8 @@ test('test', async ({ page }) => {
   await page.waitForTimeout(1000);
   await expect(page.getByText('사용 처리되었습니다')).toBeVisible();
   // 삭제
-  await expect(page.getByRole('row', { name: '상용구 입력 자동화 삭제 예정 예약안내전송 #{고객명} #{병원명} #{예약일} #{예약시간} #{대부서명} #{세부부서명} j' }).getByRole('button').nth(2)).toBeVisible();
-  await page.getByRole('row', { name: '상용구 입력 자동화 삭제 예정 예약안내전송 #{고객명} #{병원명} #{예약일} #{예약시간} #{대부서명} #{세부부서명} j' }).getByRole('button').nth(2).click();
+  await expect(page.getByRole('row', { name: '상용구 입력 자동화 삭제 예정 예약안내전송 #{고객명} #{병원명} #{예약일} #{예약시간} #{대부서명} #{세부부서명} j' }).getByRole('button').nth(1)).toBeVisible();
+  await page.getByRole('row', { name: '상용구 입력 자동화 삭제 예정 예약안내전송 #{고객명} #{병원명} #{예약일} #{예약시간} #{대부서명} #{세부부서명} j' }).getByRole('button').nth(1).click();
   await expect(page.getByText('정말로 삭제하시겠습니까?삭제 시 복원이 불가능합니다')).toBeVisible();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();

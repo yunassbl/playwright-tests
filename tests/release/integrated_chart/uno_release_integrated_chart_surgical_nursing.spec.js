@@ -109,7 +109,7 @@ test('test', async ({ page }) => {
   // 수술간호 등록 확인
   await expect(page.getByRole('cell', { name: '최지안' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '홍명희' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '눈매교정' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '수술간호내용 입력 자동화' })).toBeVisible(); // 수술간호내용
   // 수술간호 수정

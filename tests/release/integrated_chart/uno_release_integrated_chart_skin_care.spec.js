@@ -65,7 +65,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'close' })).toBeVisible();
   await page.getByRole('button', { name: 'close' }).click();
   // 피부관리 차트
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '눈매교정' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '1', exact: true }).first()).toBeVisible();
   await expect(page.getByRole('cell', { name: '0', exact: true })).toBeVisible();
@@ -108,7 +108,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '최지안' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '황범석' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '노윤이' }).nth(2)).toBeVisible();
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '눈매교정' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '1', exact: true }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '1회차' })).toBeVisible();

@@ -50,7 +50,9 @@ test('test', async ({ page }) => {
   await expect(page.getByText('접수 등록')).toBeVisible();
   // 접수 종류
   await expect(page.locator('label').filter({ hasText: '접수종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
+  // await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').first().click();
+  await expect(page.getByRole('combobox').nth(0)).toBeVisible();
+  await page.getByRole('combobox').nth(0).click();
   await page.getByRole('option', { name: '상담접수' }).click();
   // 접수 부서
   await expect(page.getByText('접수부서')).toBeVisible();
@@ -121,7 +123,9 @@ test('test', async ({ page }) => {
   await expect(page.getByText('접수 수정')).toBeVisible();
   // 접수 종류
   await expect(page.locator('label').filter({ hasText: '접수종류' })).toBeVisible();
-  await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').first().click();
+  // await page.locator('.sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').first().click();
+  await expect(page.getByRole('combobox').nth(0)).toBeVisible();
+  await page.getByRole('combobox').nth(0).click();
   await page.getByRole('option', { name: '진료접수' }).click();
   // 접수 부서
   await expect(page.getByText('접수부서')).toBeVisible();
@@ -160,15 +164,18 @@ test('test', async ({ page }) => {
   // 시/수술 카테고리 추가 버튼
   await page.getByRole('button', { name: '+', exact: true }).click();
   await page.getByRole('button', { name: '+', exact: true }).click();
-  await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .sc-hBtRBD > .sc-hYmls').click();
+  await page.getByRole('button', { name: '-', exact: true }).nth(1).click();
+  // await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .sc-hBtRBD > .sc-hYmls').click();
   // 시/수술 카테고리 추가
   await expect(page.getByText('시/수술 카테고리')).toBeVisible();
-  await page.locator('.sc-fUBkdm > div:nth-child(2) > div > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  // await page.locator('.sc-fUBkdm > div:nth-child(2) > div > .sc-lnPyaJ > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await page.getByRole('combobox', { name: '시/수술 카테고리를 선택하세요' }).nth(1).click();
   // await page.locator('[role="combobox"]').nth(22).click();
   await page.getByRole('option', { name: '성형', exact: true }).click();
   // 시/수술명 추가
   await expect(page.locator('label').filter({ hasText: '시/수술명' })).toBeVisible();
-  await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .sc-hBtRBD > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  // await page.locator('div:nth-child(2) > div:nth-child(2) > .sc-lnPyaJ > .sc-hBtRBD > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiButtonBase-root').click();
+  await page.getByRole('combobox', { name: '시/수술명을 선택하세요' }).nth(1).click();
   await page.getByRole('option', { name: '눈매교정' }).click();
   // 접수 메모
   await expect(page.getByText('접수메모')).toBeVisible();
@@ -190,7 +197,7 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '홍명희' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '직원소개', exact: true })).toBeVisible();
   await expect(page.getByRole('cell', { name: '피부 시술' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '성형' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '성형' }).nth(1)).toBeVisible();
   await expect(page.getByRole('cell', { name: '인모드' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '눈매교정' })).toBeVisible();
   await expect(page.locator('div:nth-child(2) > .sc-hmdomO > .sc-bXCLTC > tr > td:nth-child(16)')).toBeVisible();

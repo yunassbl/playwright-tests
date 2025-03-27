@@ -37,8 +37,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '고객명' })).toBeVisible();
   await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
   await expect(page.locator('th').filter({ hasText: '접수' })).toBeVisible();
-  await expect(page.getByRole('button', { name: '접수' })).toBeVisible();
-  await page.getByRole('button', { name: '접수' }).click();
+  await expect(page.getByRole('button', { name: '접수' }).nth(1)).toBeVisible();
+  await page.getByRole('button', { name: '접수' }).nth(1).click();
   await page.waitForTimeout(1000);
   await expect(page.getByText('오늘 예약이 없는 고객입니다.접수하시겠습니까?')).toBeVisible();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
@@ -65,7 +65,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('일자')).toBeVisible();
   // 방문시간
   await expect(page.getByText('방문시간')).toBeVisible();
-  await expect(page.getByRole('combobox', { name: '-' })).tobevisi();
+  await expect(page.getByRole('combobox', { name: '-' })).toBeVisible();
   await page.getByRole('combobox', { name: '-' }).click();
   await page.waitForTimeout(1000);
   await expect(page.getByRole('option', { name: '9:00', exact: true })).toBeVisible();

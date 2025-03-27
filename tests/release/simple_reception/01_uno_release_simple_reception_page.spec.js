@@ -24,10 +24,10 @@ test('test', async ({ page }) => {
   await page.waitForTimeout(1000);
   // 메인 화면 진입
   await expect(page.getByRole('button', { name: '로그아웃' })).toBeVisible();
-  await expect(page.getByText('간편접수')).toBeVisible();
+  await expect(page.getByText('간편접수').nth(0)).toBeVisible();
   // 간편 접수 새 창 확인
   const page1Promise = page.waitForEvent('popup');
-  await page.getByText('간편접수').click();
+  await page.getByText('간편접수').nth(0).click();
   const page1 = await page1Promise;
   await expect(page1.getByText('간편접수 확인')).toBeVisible();
   // 간편접수 닫기

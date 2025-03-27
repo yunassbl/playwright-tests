@@ -50,7 +50,8 @@ test('test', async ({ page }) => {
   await expect(page.getByText('탭 순서와 보고싶은 탭만 지정할 수 있습니다')).toBeVisible();
   await expect(page.getByText('핀 고정시 해당 메뉴가 기본으로 노출됩니다')).toBeVisible();
   // 문진 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(13).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(13).click();
+  await page.getByRole('checkbox', { name: '문진' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -59,7 +60,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 처방전 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(12).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(12).click();
+  await page.getByRole('checkbox', { name: '처방전' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -68,7 +70,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 통화 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(11).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(11).click();
+  await page.getByRole('checkbox', { name: '통화' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -77,7 +80,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 메시지 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(10).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(10).click();
+  await page.getByRole('checkbox', { name: '메시지' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -86,7 +90,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 수납 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(9).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(9).click();
+  await page.getByRole('checkbox', { name: '펜차트' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -95,7 +100,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 펜차트 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(8).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(8).click();
+  await page.getByRole('checkbox', { name: '수납' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -104,7 +110,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 피부관리 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(7).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(7).click();
+  await page.getByRole('checkbox', { name: '피부관리' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -113,7 +120,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 간호 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(6).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(6).click();
+  await page.getByRole('checkbox', { name: '간호' }).nth(1).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -122,7 +130,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 수술간호 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(5).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(5).click();
+  await page.getByRole('checkbox', { name: '수술간호' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -131,7 +140,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 시/수술 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(4).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(4).click();
+  await page.getByRole('checkbox', { name: '시/수술' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -140,7 +150,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 진료 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(3).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(3).click();
+  await page.getByRole('checkbox', { name: '진료' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -149,7 +160,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 상담 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(2).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(2).click();
+  await page.getByRole('checkbox', { name: '상담' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -158,7 +170,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 접수 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(1).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(1).click();
+  await page.getByRole('checkbox', { name: '접수' }).click();
   await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
   await page.getByRole('button', { name: '확인' }).click();
   await expect(page.getByText('통합차트').nth(0)).toBeVisible();
@@ -167,7 +180,8 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('heading', { name: '통합차트 설정' })).toBeVisible();
   await expect(page.getByText('통합차트 열람 시 등록화면의 기본 값을 지정할 수 있습니다')).toBeVisible();
   // 예약 체크 해제
-  await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(0).click();
+  // await page.locator('div.sc-cTTdyq .MuiCheckbox-root input[type="checkbox"]').nth(0).click();
+  await page.getByRole('checkbox', { name: '예약' }).click();
   await expect(page.getByText('핀 고정된 메뉴는 숨김 처리할 수 없습니다')).toBeVisible();
   // 통합차트 설정 > 전체선택 
   await expect(page.getByText('전체선택', { exact: true })).toBeVisible();

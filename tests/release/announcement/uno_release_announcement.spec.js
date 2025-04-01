@@ -18,7 +18,8 @@ test('test', async ({ page }) => {
   await page.getByRole('textbox', { name: '아이디(이메일)를 입력하세요' }).fill('jwpark@v2test.com');
   await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).click();
   await page.waitForTimeout(1000);
-  await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).fill('unoc2024$$');
+  await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).fill('uunn2345%%');
+  await page.waitForTimeout(1000);
   await expect(page.getByRole('button', { name: '로그인' })).toBeVisible();
   await page.getByRole('button', { name: '로그인' }).click();
   await page.waitForTimeout(1000);
@@ -64,7 +65,7 @@ test('test', async ({ page }) => {
   await expect(page.getByText('등록되었습니다')).toBeVisible();
   await expect(page.getByText('일일공지 작성 자동화')).toBeVisible();
   await page.getByText('일일공지 작성 자동화').hover();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
   // 일일공지 수정
   await expect(page.locator('div').filter({ hasText: /v2일일공지 작성 자동화모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(1)).toBeVisible();
   await page.locator('div').filter({ hasText: /v2일일공지 작성 자동화모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(1).click();
@@ -87,13 +88,13 @@ test('test', async ({ page }) => {
   await expect(page.getByRole('button', { name: '공지사항' })).toBeVisible();
   await expect(page.getByText('일일공지 작성 자동화 수정')).toBeVisible();
   await page.getByText('일일공지 작성 자동화 수정').hover();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
   // 일일공지 고정
   await expect(page.locator('div').filter({ hasText: /v2일일공지 작성 자동화 수정모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(3)).toBeVisible();
   await page.locator('div').filter({ hasText: /v2일일공지 작성 자동화 수정모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(3).click();
   await expect(page.getByText('일일공지 작성 자동화 수정')).toBeVisible();
   await page.getByText('일일공지 작성 자동화').hover();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
   // 일일공지 삭제
   await expect(page.locator('div').filter({ hasText: /v2일일공지 작성 자동화 수정모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(2)).toBeVisible();
   await page.locator('div').filter({ hasText: /v2일일공지 작성 자동화 수정모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(2).click();
@@ -125,9 +126,10 @@ test('test', async ({ page }) => {
   // 전체공지 작성 확인
   await expect(page.getByText('전체공지 작성 자동화')).toBeVisible();
   await page.getByText('전체공지 작성 자동화').hover();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
   await expect(page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(3)).toBeVisible();
   await page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(3).click();
+  await page.waitForTimeout(1000);
   // 전체공지 수정
   await expect(page.getByText('종류선택')).toBeVisible();
   await expect(page.getByRole('button', { name: '전체공지' })).toBeVisible();
@@ -143,7 +145,7 @@ test('test', async ({ page }) => {
   // 전체공지 고정
   await expect(page.getByText('전체공지 작성 자동화')).toBeVisible();
   await page.getByText('전체공지 작성 자동화').hover();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
   await expect(page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(5)).toBeVisible();
   await page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(5).click();
   await page.waitForTimeout(1000);
@@ -152,7 +154,7 @@ test('test', async ({ page }) => {
   // 전체공지 삭제
   await expect(page.getByText('전체공지 작성 자동화')).toBeVisible();
   await page.getByText('전체공지 작성 자동화').hover();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
   await expect(page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(4)).toBeVisible();
   await page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(4).click();
   // 전체공지 삭제 안내 팝업

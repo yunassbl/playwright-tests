@@ -16,11 +16,15 @@ class Announcement {
         this.cancelButton = page.getByRole('button', { name: '취소', exact: true });
         this.confirmButton = page.getByRole('button', { name: '확인' });
 
+        // 일일 공지 관련 버튼
         this.dailyEditButton = page.locator('div').filter({ hasText: /v2공지_작성_자동화모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(1);
         this.dailyFixButton = page.locator('div').filter({ hasText: /v2공지_작성_자동화_수정모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(3);
         this.dailyDeleteButton = page.locator('div').filter({ hasText: /v2공지_작성_자동화_수정모든 공지를 불러왔습니다\.$/ }).getByRole('button').nth(2);
 
-        // this.fullEditButton = 
+        // 전체 공지 관련 버튼
+        this.fullEditButton = page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(3);
+        this.fullFixButton = page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(5);
+        this.fullDeleteButton = page.locator('.MuiButtonBase-root.MuiIconButton-root').nth(4);
 
         this.deleteModalText = page.getByText('게시글을 삭제하시겠습니까?');
 
@@ -87,7 +91,8 @@ class Announcement {
         await expect(this.announceInput).toBeVisible();
         await this.announceInput.click();
         await this.announceInput.fill(this.ANNOUNCE_TEXT);
-        await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('domcontentloaded');
     }
 
     // 전체공지 내용 작성 까지만
@@ -95,7 +100,8 @@ class Announcement {
         await expect(this.announceInput).toBeVisible();
         await this.announceInput.click();
         await this.announceInput.fill(this.ANNOUNCE_TEXT);
-        await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('domcontentloaded');
     }
 
     // 저장 버튼 선택
@@ -119,17 +125,22 @@ class Announcement {
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.dailyEditButton).toBeVisible();
         await this.dailyEditButton.click();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('domcontentloaded');
         await expect(this.typeOfAnnounce).toBeVisible();
         await expect(this.announceText).toBeVisible();
     }
 
-    //
+    // 전체공지 수정 선택 까지만
     async editFullAnnounce() {
         await expect(this.announceText).toBeVisible();
         await this.announceText.hover();
-        await this.page.waitForTimeout(2000);
-        await ddd
+        // await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('domcontentloaded');
+        await expect(this.fullEditButton).toBeVisible();
+        await this.fullEditButton.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        await expect(this.typeOfAnnounce).toBeVisible();
+        await expect(this.announceText).toBeVisible();
     }
 
     // 공지 내용 수정 작성 까지만
@@ -137,7 +148,8 @@ class Announcement {
         await expect(this.announceText).toBeVisible();
         await this.announceInput.click();
         await this.announceInput.fill(this.ANNOUNCE_TEXT_EDIT);
-        await this.page.waitForTimeout(1000);
+        // await this.page.waitForTimeout(1000);
+        await this.page.waitForLoadState('domcontentloaded');
     }
 
     // 공지내용 수정 확인
@@ -150,10 +162,22 @@ class Announcement {
         await expect(this.announceEditText).toBeVisible();
         await expect(this.announceEditText).toBeEnabled();
         await this.announceEditText.hover();
-        await this.page.waitForTimeout(2000);
+        // await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('domcontentloaded');
         await expect(this.dailyFixButton).toBeVisible();
         await this.dailyFixButton.click();
-        await expect(this.typeOfAnnounce).toBeVisible();
+        await expect(this.announceEditText).toBeVisible();
+    }
+
+    // 전체공지 고정 선택 까지
+    async fixFullAnnounce() {
+        await expect(this.announceEditText).toBeVisible();
+        await expect(this.announceEditText).toBeEnabled();
+        await this.announceEditText.hover();
+        // await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('domcontentloaded');
+        await expect(this.fullFixButton).toBeVisible();
+        await this.fullFixButton.click();
         await expect(this.announceEditText).toBeVisible();
     }
 
@@ -162,9 +186,23 @@ class Announcement {
         await expect(this.announceEditText).toBeVisible();
         await expect(this.announceEditText).toBeEnabled();
         await this.announceEditText.hover();
-        await this.page.waitForTimeout(2000);
+        // await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState('domcontentloaded');
         await expect(this.dailyDeleteButton).toBeVisible();
         await this.dailyDeleteButton.click();
+        await expect(this.deleteModalText).toBeVisible();
+        await expect(this.confirmButton).toBeVisible();
+        await this.confirmButton.click();
+        await expect(this.deleteSuccessText).toBeVisible();
+    }
+
+    async deleteFullAnnounce() {
+        await expect(this.announceEditText).toBeVisible();
+        await expect(this.announceEditText).toBeEnabled();
+        await this.announceEditText.hover();
+        await this.page.waitForLoadState('domcontentloaded');
+        await expect(this.fullDeleteButton).toBeVisible();
+        await this.fullDeleteButton.click();
         await expect(this.deleteModalText).toBeVisible();
         await expect(this.confirmButton).toBeVisible();
         await this.confirmButton.click();

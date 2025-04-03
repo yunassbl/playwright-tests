@@ -27,12 +27,41 @@ class LoginPage {
     await expect(this.passwordInput).toBeVisible();
     await this.passwordInput.fill(password);
     await expect(this.loginButton).toBeVisible();
-    await this.loginButton.click();
-    await this.page.waitForTimeout(1000);
+    // await this.loginButton.click();
+
+    await Promise.all([
+      this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+      this.loginButton.click()
+    ]);
+    // 네트워크 안정화 대기
+    // await this.page.waitForLoadState('networkidle');
+    // await this.page.waitForLoadState('domcontentloaded'); // <------
+
+    // if (await this.page.url() === 'https://unocare.co.kr/login') {
+    //   throw new Error("Login fail: Login screen shows again");
+    // }
+
+    if (await this.isLoginFailed()) {
+      console.log("Login failed, then retry");
+      await this.retryLogin(username, password);
+    }
+
+    await expect(this.page).not.toHaveURL('https://unocare.co.kr/login');
+
   }
 
   async isLoggedin() {
     return await this.logoutButton.isVisible();
+  }
+
+  // 로그인 실패하면
+  async isLoginFailed() {
+    return this.loginButton.isVisible();
+  }
+
+  async retryLogin(username, password) {
+    await this.page.reload();
+    await this.login(username, password);
   }
 }
 

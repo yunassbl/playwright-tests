@@ -6,11 +6,15 @@ class Exception {
     }
 
     async closePopupIfExists() {
-        const popupButton = page.getByText('오늘하루 보지않기');
+        const popupButton = this.page.getByText('오늘하루 보지않기');
 
         if (await popupButton.isVisible()) {
             await popupButton.click();
         }
+    }
+
+    async loginFail() {
+        
     }
 }
 

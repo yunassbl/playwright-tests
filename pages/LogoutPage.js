@@ -28,8 +28,19 @@ class LogoutPage {
     await expect(this.passwordInput).toBeVisible();
     await this.passwordInput.fill(password);
     await expect(this.loginButton).toBeVisible();
-    await this.loginButton.click();
-    await this.page.waitForTimeout(1000);
+    // await this.loginButton.click();
+    // await this.page.waitForTimeout(1000);
+    await Promise.all([
+      this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+      this.loginButton.click()
+    ]);
+
+    if (await this.isLoginFailed()) {
+      console.log("Login failed, then retry");
+      await this.retryLogin(username, password);
+    }
+
+    await expect(this.page).not.toHaveURL('https://unocare.co.kr/login');
   }
 
   async isLoggedIn() {
@@ -50,6 +61,15 @@ class LogoutPage {
     await expect(this.logoutModalText).toBeVisible();
     await expect(this.confirmButton).toBeVisible();
     await this.confirmButton.click();
+  }
+
+  async isLoginFailed() {
+    return this.loginButton.isVisible();
+  }
+
+  async retryLogin(username, password) {
+    await this.page.reload();
+    await this.login(username, password);
   }
 }
 

@@ -13,9 +13,6 @@ class Exception {
         }
     }
 
-    async loginFail() {
-        
-    }
 }
 
 

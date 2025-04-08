@@ -1,4 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../../pages/LoginPage';
+import { Exception } from '../../../pages/Exception';
+// import { customerSearch } from '../../../pages/CustomerSearch';
+import { ChartHistory } from '../../../pages/ChartHistory';
 
 test.setTimeout(90000);
 
@@ -9,139 +13,49 @@ test.use({
   }
 });
 
-test('test', async ({ page }) => {
-  await page.goto('https://unocare.co.kr/login');
+test('ChartingHistory Test', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  const exception = new Exception(page);
+  // const search = new customerSearch(page);
+  const chartHistory = new ChartHistory(page);
+  
+
+  // 로그인 페이지 접속
+  await loginPage.goto();
+
   // 로그인
-  await expect(page.getByRole('img', { name: '고객을 관리하는 가장 좋은 선택 "UNO CRM"' })).toBeVisible();
-  await page.getByRole('textbox', { name: '아이디(이메일)를 입력하세요' }).click();
-  await page.waitForTimeout(1000);
-  await page.getByRole('textbox', { name: '아이디(이메일)를 입력하세요' }).fill('jwpark@v2test.com');
-  await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).click();
-  await page.waitForTimeout(1000);
-  await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).fill('unoc2024$$');
-  await expect(page.getByRole('button', { name: '로그인' })).toBeVisible();
-  await page.getByRole('button', { name: '로그인' }).click();
-  await page.waitForTimeout(1000);
-  // 메인 화면 진입
-  await expect(page.getByRole('button', { name: '로그아웃' })).toBeVisible();
-  await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
-  await page.getByRole('button', { name: '고객 조회' }).click();
-  await page.waitForTimeout(1000);
-  // 고객 조회 진입
-  await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
-  await page.getByRole('button', { name: '고객 조회' }).click();
-  await page.waitForTimeout(1000);
-  // 고객 조회
-  await expect(page.getByText('고객조회 내역')).toBeVisible();
-  await expect(page.getByRole('paragraph').filter({ hasText: '고객명' })).toBeVisible();
-  await page.getByRole('textbox', { name: '고객명', exact: true }).click();
-  await page.waitForTimeout(1000);
-  await page.getByRole('textbox', { name: '고객명', exact: true }).fill('차팅이력');
-  await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
-  await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByText('고객조회 내역')).toBeVisible();
-  await expect(page.getByRole('cell', { name: '고객명' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '차팅이력_확인용' })).toBeVisible();
-  await page.getByRole('button', { name: '차팅이력_확인용' }).click();
-  await page.waitForTimeout(1000);
-  // 통합차트
-  await expect(page.getByText('통합차트')).toBeVisible();
+  await loginPage.login('jwpark@v2test.com', 'uunn2345%%');
+
+  // 팝업 처리 
+  await page.waitForTimeout(2000);
+  await exception.closePopupIfExists();
+
+  // const popupButton = page.getByText('오늘하루 보지않기');
+  // if (await popupButton.isVisible()) {
+  //   await popupButton.click();
+  // }
+
+  // 로그인 성공 여부 확인
+  await page.waitForTimeout(2000);
+  expect(await loginPage.isLoggedin()).toBeTruthy();
+
+  await chartHistory.searchCustomerName();
+  await chartHistory.enterInIntegratedChart();
+
   // 차팅이력
-  await expect(page.getByRole('tab', { name: '차팅이력' })).toBeVisible();
-  // 차팅이력 > 부서선택
-  await page.getByRole('button', { name: '부서선택' }).click();
-  await expect(page.getByRole('option', { name: '상담 - 상담사A2' })).toBeVisible();
-  await page.getByRole('option', { name: '상담 - 상담사A2' }).click();
-  await page.waitForTimeout(1000);
-  // 배경 선택
-  await page.locator('.MuiBackdrop-root').click();
-  await page.waitForTimeout(1000);
-  // 부서선택 확인
-  await expect(page.locator('#chartItemsDiv').getByText('예약').first()).toBeVisible();
-  // 차팅이력 > 부서선택
-  await expect(page.getByRole('button', { name: '상담 - 상담사A2' })).toBeVisible();
-  await page.getByRole('button', { name: '상담 - 상담사A2' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByRole('option', { name: '상담 - 상담사B' })).toBeVisible();
-  await page.getByRole('option', { name: '상담 - 상담사B' }).click();
-  await page.waitForTimeout(1000);
-  // 배경 선택
-  await page.locator('.MuiBackdrop-root').click();
-  await expect(page.locator('#chartItemsDiv').getByText('예약').first()).toBeVisible();
-  await expect(page.locator('#chartItemsDiv').getByText('예약').nth(2)).toBeVisible();
-  // 차팅이력 > 부서선택
-  await expect(page.getByRole('button', { name: '상담 - 상담사B, 상담 - 상담사A2' })).toBeVisible();
-  await page.getByRole('button', { name: '상담 - 상담사B, 상담 - 상담사A2' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByRole('option', { name: '상담 - 상담사C' })).toBeVisible();
-  await page.getByRole('option', { name: '상담 - 상담사C' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByRole('option', { name: '상담 - 상담사D' })).toBeVisible();
-  await page.getByRole('option', { name: '상담 - 상담사D' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByRole('option', { name: '쁘띠 - 리쥬란' })).toBeVisible();
-  await page.getByRole('option', { name: '쁘띠 - 리쥬란' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByRole('option', { name: '쁘띠 - 울쎄라' })).toBeVisible();
-  await page.getByRole('option', { name: '쁘띠 - 울쎄라' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByRole('option', { name: '쁘띠 - 슈링크' })).toBeVisible();
-  await page.getByRole('option', { name: '쁘띠 - 슈링크' }).click();
-  await page.waitForTimeout(1000);
-  // 배경 선택
-  await page.locator('.MuiBackdrop-root').click();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(0)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(2)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(4)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(6)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(8)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(10)).toBeVisible();
-  await expect(page.locator('div[type="APPOINTMENT"]').nth(12)).toBeVisible();
-  // 차팅이력 > 전체접기
-  await expect(page.getByRole('button', { name: '전체 접기' })).toBeVisible();
-  await page.getByRole('button', { name: '전체 접기' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByRole('button', { name: '전체 펼치기' })).toBeVisible();
-  // 차팅이력 > 전체접기 > 전체 펼치기
-  await expect(page.getByRole('button', { name: '전체 펼치기' })).toBeVisible();
-  await page.getByRole('button', { name: '전체 펼치기' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByRole('button', { name: '전체 접기' })).toBeVisible();
-  await expect(page.getByText('통합차트')).toBeVisible();
-  // 차팅이력 > 부서 선택 해제
-  await page.getByRole('button', { name: '상담 - 상담사B, 쁘띠 - 울쎄라, 상담 - 상담사' }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByText('상담 - 상담사A2', { exact: true })).toBeVisible();
-  await page.getByText('상담 - 상담사A2', { exact: true }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByText('상담 - 상담사B', { exact: true })).toBeVisible();
-  await page.getByText('상담 - 상담사B', { exact: true }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByText('상담 - 상담사C', { exact: true })).toBeVisible();
-  await page.getByText('상담 - 상담사C', { exact: true }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByText('상담 - 상담사D', { exact: true })).toBeVisible();
-  await page.getByText('상담 - 상담사D', { exact: true }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByText('쁘띠 - 리쥬란', { exact: true })).toBeVisible();
-  await page.getByText('쁘띠 - 리쥬란', { exact: true }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByText('쁘띠 - 울쎄라', { exact: true })).toBeVisible();
-  await page.getByText('쁘띠 - 울쎄라', { exact: true }).click();
-  await page.waitForTimeout(1000);
-  await expect(page.locator('#menu-').getByText('쁘띠 - 슈링크')).toBeVisible();
-  await page.getByText('쁘띠 - 슈링크', { exact: true }).nth(1).click();
-  await page.waitForTimeout(1000);
-  // 배경 선택
-  await page.locator('.MuiBackdrop-root').click();
-  await page.waitForTimeout(1000);
-  await expect(page.getByText('통합차트')).toBeVisible();
+  await chartHistory.checkChartHistoryName();
+  await chartHistory.selectDepartment();
 
+  // 차팅이력 > 예약 배지 확인
+  await chartHistory.checkChartHistory();
 
+  // 체크 해제
+  await chartHistory.selectDepart();
+  await chartHistory.uncheckDepartment();
 
-
-
+  // 접기, 펼치기
+  await chartHistory.foldHistoryList();
+  await chartHistory.spreadHistoryList();
 
 
 });

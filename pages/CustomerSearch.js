@@ -12,16 +12,16 @@ class customerSearch {
         this.closeButton = page.getByRole('button', { name: 'close' });
         // this.popupSearch = page.getByRole('button', { name: '조회' });
 
-        this.categoryOfName = page.getByRole('cell', { name: '고객명' });
+        this.nameCategory = page.getByRole('cell', { name: '고객명' });
         this.resultSearchName = page.getByRole('cell', { name: '자동화_신규고객' });
 
-        this.categoryOfChart = page.getByRole('cell', { name: '차트번호' });
+        this.chartCategory = page.getByRole('cell', { name: '차트번호' });
         this.resultSearchChart = page.getByRole('cell', { name: '1234568' });
 
-        this.categoryOfNumber = page.getByRole('cell', { name: '전화번호' });
+        this.numberCategory = page.getByRole('cell', { name: '전화번호' });
         this.resultSearchNumber = page.getByRole('cell', { name: '-3535-3535' });
 
-        this.categoryOfBirth = page.getByRole('cell', { name: '생년월일' });
+        this.birthCategory = page.getByRole('cell', { name: '생년월일' });
         this.resultSearchBirth = page.getByRole('cell', { name: '-05-05' });
 
         this.notFoundMessage = page.getByRole('cell', { name: '검색된 고객이 없습니다' });
@@ -39,10 +39,10 @@ class customerSearch {
         await expect(this.searchButton).toBeVisible();
         await this.searchButton.click();
         // 고객조회 팝업 등장하면서 노출 확인 
-        await this.categoryOfName.waitFor();
+        await this.nameCategory.waitFor();
         await this.resultSearchName.waitFor();
         // await this.page.waitForLoadState('domcontentloaded');
-        await expect(this.categoryOfName).toBeVisible();
+        await expect(this.nameCategory).toBeVisible();
         await expect(this.resultSearchName).toBeVisible();
     }
 
@@ -54,9 +54,9 @@ class customerSearch {
         await expect(this.searchButton).toBeVisible();
         await this.searchButton.click();
         // 고객조회 팝업 등장하면서 노출 확인
-        await this.categoryOfNumber.waitFor();
+        await this.numberCategory.waitFor();
         await this.resultSearchNumber.waitFor();
-        await expect(this.categoryOfNumber).toBeVisible();
+        await expect(this.numberCategory).toBeVisible();
         await expect(this.resultSearchNumber).toBeVisible();
     }
 
@@ -85,9 +85,9 @@ class customerSearch {
         await expect(this.searchButton).toBeVisible();
         await this.searchButton.click();
         await this.page.waitForLoadState('domcontentloaded');
-        await this.categoryOfChart.waitFor();
+        await this.chartCategory.waitFor();
         await this.resultSearchChart.waitFor();
-        await expect(this.categoryOfChart).toBeVisible();
+        await expect(this.chartCategory).toBeVisible();
         await expect(this.resultSearchChart).toBeVisible();
     }
 
@@ -110,7 +110,7 @@ class customerSearch {
         await expect(this.searchButton).toBeVisible();
         await this.searchButton.click();
         await this.page.waitForLoadState('domcontentloaded');
-        await expect(this.categoryOfBirth).toBeVisible();
+        await expect(this.birthCategory).toBeVisible();
         await expect(this.resultSearchBirth).toBeVisible();
     }
 

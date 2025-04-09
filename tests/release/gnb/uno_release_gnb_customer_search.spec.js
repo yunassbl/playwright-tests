@@ -12,7 +12,7 @@ test.use({
   }
 });
 
-test('CustomerSearch Test', async ({ page }) => {
+test('GNB > Customer Search Test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const exception = new Exception(page);
   const search = new customerSearch(page);

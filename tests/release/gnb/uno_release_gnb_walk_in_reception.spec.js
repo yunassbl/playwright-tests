@@ -13,7 +13,7 @@ test.use({
   }
 });
 
-test('Walk in Reception Test', async ({ page }) => {
+test('GNB > Walk in Reception Test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const exception = new Exception(page);
   const search = new customerSearch(page);

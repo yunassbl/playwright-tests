@@ -13,7 +13,7 @@ test.use({
   }
 });
 
-test('ChartingHistory Test', async ({ page }) => {
+test('Integrated Chart > Charting History Test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const exception = new Exception(page);
   // const search = new customerSearch(page);

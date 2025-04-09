@@ -12,7 +12,7 @@ test.use({
   }
 });
 
-test('Announcement Test', async ({ page }) => {
+test('Main > Announcement Test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const announcement = new Announcement(page);
   const exception = new Exception(page);

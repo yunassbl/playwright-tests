@@ -15,7 +15,7 @@ test.use({
   }
 });
 
-test('test', async ({ page }) => {
+test('Integrated Chart > Consultation Test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const exception = new Exception(page);
   const search = new customerSearch(page);

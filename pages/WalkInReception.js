@@ -131,6 +131,7 @@ class WalkInReception {
         await expect(this.confirmButton).toBeVisible();
         await this.confirmButton.click();
         await this.page.waitForLoadState('domcontentloaded');
+        console.log('당일접수 신청 성공');
     }
 
     // 당일접수 차트 진입 확인
@@ -320,6 +321,7 @@ class WalkInReception {
     // 저장 완료 스낵바 확인
     async checkSaveSuccessText() {
         await expect(this.saveSuccessText).toBeVisible();
+        console.log('저장 완료 스낵바 확인 성공');
     }
     
     // 통합차트 진입
@@ -328,12 +330,14 @@ class WalkInReception {
         await this.customerName.dblclick();
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.integratedChartTitle).toBeVisible();
+        console.log('통합차트 진입 성공');
     }
 
     // 접수차트 진입
     async enterReceptionChart() {
         await expect(this.receptionChart).toBeVisible();
         await this.receptionChart.click();
+        console.log('접수 차트 진입 성공');
     }
     
     // 
@@ -368,6 +372,7 @@ class WalkInReception {
         await expect(this.page.getByRole('cell', { name: this.selectedSurgicalCategoryText })).toBeVisible();
         await expect(this.page.getByRole('cell', { name: this.selectedSurgeryText })).toBeVisible();
         await expect(this.page.getByRole('cell', { name: this.enteredMemoText })).toBeVisible();
+        console.log('접수 결과 확인 성공');
     }
 
     ////////
@@ -379,6 +384,7 @@ class WalkInReception {
         await this.editButton.click();
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.receptionEditTitle).toBeVisible();
+        console.log('접수 수정 진입 성공');
     }
 
     async editType() {
@@ -514,6 +520,7 @@ class WalkInReception {
     async addingSurgeryCategory() {
         await expect(this.addingSurgeryCategoryButton).toBeVisible();
         await this.addingSurgeryCategoryButton.click();
+        console.log('시/수술 카테고리 추가 성공');
     }
 
     // 시/수술 카테고리
@@ -564,6 +571,7 @@ class WalkInReception {
 
     async checkEditSuccessText() {
         await expect(this.editSuccessText).toBeVisible();
+        console.log('접수 수정 성공');
     }
 
 
@@ -586,10 +594,12 @@ class WalkInReception {
 
     async checkCancelSuccessText() {
         await expect(this.cancelSuccessText).toBeVisible();
+        console.log('접수 취소 성공');
     }
 
     async cancelStatus() {
         await expect(this.checkCancelStatus).toBeVisible();
+        console.log('접수 취소 상태 확인 성공');
     }
 
     /////
@@ -611,15 +621,13 @@ class WalkInReception {
 
     async checkDeleteSuccessText() {
         await expect(this.deleteSuccessText).toBeVisible();
+        console.log('접수 삭제 성공');
     }
 
     async checkDeleteSucess() {
         await expect(this.page.getByRole('cell', { name: this.selectedReceptionText })).not.toBeVisible(); 
+        console.log('접수 삭제 상태 확인 성공');
     }
-
-
-
-
 }
 
 export { WalkInReception }

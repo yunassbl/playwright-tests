@@ -47,6 +47,7 @@ class Announcement {
         await expect(this.announcement).toBeVisible();
         await this.announcement.click();
         await expect(this.createButton).not.toBeVisible();
+        console.log('공지사항 접기 성공');
     }
     
     // 공지사항 펼치기
@@ -55,6 +56,7 @@ class Announcement {
         await expect(this.announcement).toBeVisible();
         await this.announcement.click();
         await expect(this.createButton).toBeVisible();
+        console.log('공지사항 펼치기 성공');
     }
 
     // 작성 선택
@@ -62,6 +64,7 @@ class Announcement {
         await expect(this.createButton).toBeVisible();
         await this.createButton.click();
         await expect(this.typeOfAnnounce).toBeVisible();
+        console.log('공지사항 작성 선택 성공');
     }
 
     // 작성 취소
@@ -69,6 +72,7 @@ class Announcement {
         await expect(this.cancelButton).toBeVisible();
         await this.cancelButton.click();
         await expect(this.typeOfAnnounce).not.toBeVisible();
+        console.log('공지사항 작성 취소 성공');
     }
 
     
@@ -77,6 +81,7 @@ class Announcement {
         await expect(this.dailyAnnouncement).toBeVisible();
         await this.dailyAnnouncement.click();
         await expect(this.typeOfAnnounce).toBeVisible();
+        console.log('일일공지 선택');
     }
     
     // 전체공지 선택
@@ -84,6 +89,7 @@ class Announcement {
         await expect(this.fullAnnouncement).toBeVisible();
         await this.fullAnnouncement.click();
         await expect(this.typeOfAnnounce).toBeVisible();
+        console.log('전체공지 선택');
     }
 
     // 일일공지 내용 작성 까지만
@@ -114,6 +120,7 @@ class Announcement {
     // 저장 성공 스낵바 문구
     async saveSuccessCheck() {
         await expect(this.saveSuccessText).toBeVisible();
+        console.log('공지 저장 성공');
     }
 
     // 일일공지 수정 선택 까지만
@@ -155,6 +162,7 @@ class Announcement {
     // 공지내용 수정 확인
     async checkAnnounceEdit() {
         await expect(this.announceEditText).toBeVisible();
+        console.log('공지 수정 성공');
     }
 
     // 일일공지 고정 선택 까지
@@ -194,6 +202,7 @@ class Announcement {
         await expect(this.confirmButton).toBeVisible();
         await this.confirmButton.click();
         await expect(this.deleteSuccessText).toBeVisible();
+        console.log('일일공지 삭제 성공');
     }
 
     async deleteFullAnnounce() {
@@ -207,6 +216,7 @@ class Announcement {
         await expect(this.confirmButton).toBeVisible();
         await this.confirmButton.click();
         await expect(this.deleteSuccessText).toBeVisible();
+        console.log('전체공지 삭제 성공');
     }
 
     

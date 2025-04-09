@@ -47,7 +47,7 @@ class LoginPage {
     }
 
     await expect(this.page).not.toHaveURL('https://unocare.co.kr/login');
-
+    console.log('로그인 성공');
   }
 
   async isLoggedin() {

@@ -11,6 +11,7 @@ class Exception {
         if (await popupButton.isVisible()) {
             await popupButton.click();
         }
+        console.log('팝업 종료 성공');
     }
 
 }

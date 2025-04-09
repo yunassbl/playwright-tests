@@ -45,6 +45,7 @@ class ChartHistory {
         // await this.page.waitForLoadState('domcontentloaded');
         await expect(this.nameCategory).toBeVisible();
         await expect(this.resultSearchName).toBeVisible();
+        console.log('고객명 검색 성공');
     }
 
     async enterInIntegratedChart() {
@@ -52,6 +53,7 @@ class ChartHistory {
         await this.customerName.dblclick();
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.integratedChartTitle).toBeVisible();
+        console.log('통합차트 진입 성공');
     }
 
     async checkChartHistoryName() {
@@ -90,6 +92,7 @@ class ChartHistory {
     async selectDepart() {
         await expect(this.comboDepart).toBeVisible();
         await this.comboDepart.click();
+        console.log('부서 선택 성공');
     }
     
     async uncheckDepartment() {
@@ -109,6 +112,7 @@ class ChartHistory {
         await this.foldList.click();
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.foldList).not.toBeVisible();
+        console.log('차팅이력 영역 접기 성공');
     }
 
     async spreadHistoryList() {
@@ -116,6 +120,7 @@ class ChartHistory {
         await this.spreadList.click();
         await this.page.waitForLoadState('domcontentloaded');
         await expect(this.spreadList).not.toBeVisible();
+        console.log('차팅이력 영역 펼치기 성공');
     }
 
 }

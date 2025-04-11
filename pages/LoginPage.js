@@ -18,6 +18,7 @@ class LoginPage {
 
   async goto() {
     await this.page.goto("https://unocare.co.kr/login");
+    // await this.page.goto("https://dev.unocare.co.kr/login");
     await this.logo.isVisible();
   }
 

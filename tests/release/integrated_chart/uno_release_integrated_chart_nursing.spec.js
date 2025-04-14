@@ -14,7 +14,7 @@ test.use({
   }
 });
 
-test('test', async ({ page }) => {
+test('Integrated Chart > Nursing Chart Test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const exception = new Exception(page);
   const search = new customerSearch(page);
@@ -77,6 +77,12 @@ test('test', async ({ page }) => {
 
   await nursing.editNursingChart();
   await nursing.checkEditSuccess();
+
+  // 삭제
+  await nursing.selectChart();
+  await nursing.selectDelete();
+  await nursing.deletePopup();
+  await nursing.checkDeleteSuccess();
 
 
 

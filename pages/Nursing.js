@@ -7,15 +7,20 @@ class Nursing {
 
     this.saveButton = page.getByRole('button', { name: '저장' });
     this.editSuccessButton = page.getByRole('button', { name: '수정완료' });
+    this.deleteButton = page.getByRole('button', { name: '삭제' });
+    this.confirmButton = page.getByRole('button', { name: '확인' });
 
     this.selectOptionValue = page.getByRole("option").nth(0);
     this.editOptionValue = page.getByRole("option").nth(1);
 
     this.saveSuccessText = page.getByText('간호를 생성했습니다');
     this.editSuccessText = page.getByText('간호를 수정했습니다. 연결된 접수정보가 업데이트 됩니다');
+    this.deleteSuccessText = page.getByText('삭제되었습니다');
 
     this.registButton = page.getByRole("button", { name: "+ 간호등록" });
     this.editButton = page.locator('div:nth-child(2) > .sc-hmdomO > .sc-bXCLTC > .sc-jsJBEP > td:nth-child(2)');
+
+    this.selectChartButton = page.locator('div:nth-child(2) > .sc-hmdomO > .sc-bXCLTC > tr > td').first();
 
     // 의사
     this.doctorTitle = page.locator("label").filter({ hasText: "의사" });
@@ -76,6 +81,11 @@ class Nursing {
     this.memoEnter = page.locator('.ql-editor p'); // quill 에디터 라서 일부러 locator 이용
     // page.getByRole('paragraph').filter({ hasText: /^$/ });
     this.enteredMemoText = '';
+
+    // 삭제
+    this.deleteTitle = page.getByText('정말로 삭제하시겠습니까?');
+
+
   }
 
   async enterNursingChart() {
@@ -342,9 +352,9 @@ class Nursing {
     await expect(this.surgeryType).toBeVisible();
     await this.surgeryType.click();
     await this.page.waitForLoadState("domcontentloaded");
-    await expect(this.editOptionValue).toBeVisible();
-    this.selectedSurgeryText = await this.editOptionValue.innerText();
-    await this.editOptionValue.click();
+    await expect(this.selectOptionValue).toBeVisible();
+    this.selectedSurgeryText = await this.selectOptionValue.innerText();
+    await this.selectOptionValue.click();
     console.log("시/수술명: ", this.selectedSurgeryText);
     await this.page.waitForLoadState("domcontentloaded");
   }
@@ -429,9 +439,37 @@ class Nursing {
 
   async checkEditSuccess() {
     await expect(this.editSuccessText).toBeVisible();
-    console.log('저장 스낵바 확인 성공')
+    console.log('수정 스낵바 확인 성공')
   }
 
+  async selectChart() {
+    await expect(this.selectChartButton).toBeVisible();
+    await this.selectChartButton.click();
+    await this.page.waitForLoadState("domcontentloaded");
+    await expect(this.deleteButton).toBeVisible();
+    console.log('차트 선택 성공');
+  }
+
+  async selectDelete() {
+    await expect(this.deleteButton).toBeVisible();
+    await this.deleteButton.click();
+    await this.page.waitForLoadState("domcontentloaded");
+    await expect(this.deleteTitle).toBeVisible();
+    console.log('삭제 버튼 선택 성공');
+  }
+
+  async deletePopup() {
+    await expect(this.deleteTitle).toBeVisible();
+    await expect(this.confirmButton).toBeVisible();
+    await this.confirmButton.click();
+    await this.page.waitForLoadState("domcontentloaded");
+    console.log('간호차트 삭제 성공');
+  }
+
+  async checkDeleteSuccess() {
+    await expect(this.deleteSuccessText).toBeVisible();
+    console.log('삭제 스낵바 확인 성공');
+  }
 
 
 

@@ -1,4 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../../pages/LoginPage';
+import { Exception } from '../../../pages/Exception';
+import { customerSearch } from '../../../pages/CustomerSearch';
+import { WalkInReception } from '../../../pages/WalkInReception';
+import { Payment } from '../../../pages/Payment';
 
 test.setTimeout(90000);
 
@@ -10,38 +15,50 @@ test.use({
 });
 
 test('test', async ({ page }) => {
-  await page.goto('https://unocare.co.kr/login');
+  const loginPage = new LoginPage(page);
+  const exception = new Exception(page);
+  const search = new customerSearch(page);
+  const walkInReception = new WalkInReception(page);
+  const payment = new Payment(page);
+
+  // 로그인 페이지 접속
+  await loginPage.goto();
+
   // 로그인
-  await expect(page.getByRole('img', { name: '고객을 관리하는 가장 좋은 선택 "UNO CRM"' })).toBeVisible();
-  await page.getByRole('textbox', { name: '아이디(이메일)를 입력하세요' }).click();
-  await page.waitForTimeout(1000);
-  await page.getByRole('textbox', { name: '아이디(이메일)를 입력하세요' }).fill('jwpark@v2test.com');
-  await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).click();
-  await page.waitForTimeout(1000);
-  await page.getByRole('textbox', { name: '비밀번호를 입력하세요' }).fill('unoc2024$$');
-  await expect(page.getByRole('button', { name: '로그인' })).toBeVisible();
-  await page.getByRole('button', { name: '로그인' }).click();
-  await page.waitForTimeout(1000);
-  // 메인 화면 진입
-  await expect(page.getByRole('button', { name: '로그아웃' })).toBeVisible();
-  await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
-  await page.getByRole('button', { name: '고객 조회' }).click();
-  // 고객 조회 진입
-  await expect(page.getByRole('button', { name: '고객 조회' })).toBeVisible();
-  await page.getByRole('button', { name: '고객 조회' }).click();
+  await loginPage.login("jwpark@v2test.com", "uunn2345%%");
+
+  // 팝업 처리
+  await page.waitForTimeout(2000);
+  await exception.closePopupIfExists();
+
+  // const popupButton = page.getByText('오늘하루 보지않기');
+  // if (await popupButton.isVisible()) {
+  //   await popupButton.click();
+  // }
+
+  // 로그인 성공 여부 확인
+  await page.waitForTimeout(2000);
+  expect(await loginPage.isLoggedin()).toBeTruthy();
+
   // 고객 조회
-  await expect(page.getByText('고객조회 내역')).toBeVisible();
-  await expect(page.getByRole('paragraph').filter({ hasText: '고객명' })).toBeVisible();
-  await page.getByRole('textbox', { name: '고객명', exact: true }).click();
-  await page.getByRole('textbox', { name: '고객명', exact: true }).fill('자동화');
-  await expect(page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' })).toBeVisible();
-  await page.locator('#bodyContentsWrapper').getByRole('button', { name: '조회' }).click();
-  await expect(page.getByText('고객조회 내역')).toBeVisible();
-  await expect(page.getByRole('cell', { name: '고객명' })).toBeVisible();
-  await expect(page.getByRole('cell', { name: '자동화_신규고객' })).toBeVisible();
-  await page.getByRole('button', { name: '자동화_신규고객' }).click();
-  // 통합차트
-  await expect(page.getByText('통합차트')).toBeVisible();
+  await search.searchCustomerName();
+  // 통합 차트 진입
+  await walkInReception.enterInIntegratedChart();
+
+  // 수납 차트
+  await payment.enterPaymentChart();
+  
+
+
+
+
+
+
+
+
+
+
+
   // 수납 진입
   await page.getByText('수납 (0)').click();
   await expect(page.getByText('수납차트 (0)')).toBeVisible();

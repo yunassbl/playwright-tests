@@ -40,11 +40,12 @@ test('GNB > Walk in Reception Test', async ({ page }) => {
   expect(await loginPage.isLoggedin()).toBeTruthy();
 
 
-  // 당일접수 진행
+  // 고객 조회
   await search.searchCustomerName();
-
+  // 통합 차트
   await walkInReception.dailyReception();
 
+  // 당일 접수 진행
   await walkInReception.isChartEntered();
   await walkInReception.selectType();
   await walkInReception.selectDepartment();

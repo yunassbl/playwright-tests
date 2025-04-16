@@ -36,7 +36,7 @@ test('GNB > Customer Search Test', async ({ page }) => {
   await page.waitForTimeout(2000);
   expect(await loginPage.isLoggedin()).toBeTruthy();
 
-  ///////
+  // 고객조회
   await search.searchCustomerName();
 
   await search.chartClose();

@@ -84,9 +84,15 @@ class Payment {
          // 과세
          this.notFreeTitle = page.getByRole('paragraph').filter({ hasText: /^과세$/ });
          // 비과세
+         this.freeTitle = page.getByRole('paragraph').filter({ hasText: '비과세' });
          // 카드
          this.cardTitle = page.getByText('카드').nth(1);
          this.cardFullAmount = page.locator('.sc-eifrsQ').first();
+
+         // 현금
+         this.cashTitle = page.getByText('현금').nth(4);
+         this.cashInput = page.getByRole('textbox', { name: 'CashPaymentField' }).nth(1);
+         this.inputCashPrice = '750000';
          
          this.saveButton = page.getByRole('button', { name: '저장' });
          this.confirmButton = page.getByRole('button', { name: '확인' });
@@ -97,6 +103,22 @@ class Payment {
          // 미수
          this.unpaidCategory = page.getByRole('button', { name: '미수' });
          this.unpaidStatus = page.getByRole('cell', { name: '미수', exact: true });
+
+         // 수납취소
+         this.cancelButton = page.getByRole('button', { name: '수납취소' }).nth(1);
+         this.cancelInfoText = page.getByText('전체 수납(미수)취소 처리됩니다');
+         this.cancelSuccessText = page.getByText('수납취소 처리되었습니다');
+
+         this.cancelCategory = page.getByRole('button', { name: '수납취소' });
+
+         this.cancelStatus = page.getByRole('cell', { name: '수납취소', exact: true });
+
+         // 현금 영수증
+         this.cashReceipt = page.getByText('현금영수증(계좌이체, 현금)').nth(1);
+
+         // 완납
+         this.payFullCategory = page.getByRole('button', { name: '완납' });
+         this.payFullStatus = page.getByRole('cell', { name: '완납', exact: true });
 
 
     }
@@ -408,6 +430,7 @@ class Payment {
         await expect(this.cardTitle).toBeVisible();
         await expect(this.cardFullAmount).toBeVisible();
         await this.cardFullAmount.click();
+        await this.page.waitForLoadState('domcontentloaded');
         console.log('카드 전액 선택 확인 성공');
     }
 
@@ -542,6 +565,251 @@ class Payment {
 
         await expect(this.page.getByRole('cell', { name: this.enteredMemoText })).toBeVisible();
         const ifNameSame = this.page.getByRole('cell', { name: this.selectedCounselorText });
+        const ifManagerSame = this.page.getByRole('cell', { name: this.selectedManagerText });
+        const nameCount = await ifNameSame.count();
+        const managerCount = await ifManagerSame.count();
+
+        let verified = false;
+        let managerVerified = false;
+
+        if (nameCount > 1) {
+            for (let i = 0; i < nameCount; i++) {
+                const text = await ifNameSame.nth(i).innerText();
+                if (text.trim() === this.selectedDoctorText.trim()) {
+                    await expect(ifNameSame.nth(i)).toBeVisible();
+                    verified = true;
+                    break;
+                }
+            }
+            if (!verified) {
+                console.log(`망했습니다.`);
+            } else {
+                console.log(`이름에 중복값이 있을 경우, 전부 다 잘 들어있어요~`);
+            }
+        } else if (managerCount > 1) {
+            for (let j = 0; j < managerCount; j++) {
+                const text2 = await ifManagerSame.nth(j).innerText();
+                if (text2.trim() === this.selectedManagerText.trim()) {
+                    await expect(ifManagerSame.nth(j)).toBeVisible();
+                    managerVerified = true;
+                    break;
+                }
+            }
+            if (!managerVerified) {
+                console.log('망했어요..');
+            } else {
+                console.log('이름 중복값 다 잘 들어갔어여~~');
+            }
+        } else {
+            await expect(this.page.getByRole('cell', { name: this.selectedCounselorText })).toBeVisible();
+            await expect(this.page.getByRole('cell', { name: this.selectedManagerText })).toBeVisible();
+            console.log('차트 들어간 값들 문제 없어요~~');
+        }        
+    }
+
+    async checkPaymentInfo() {
+        const today = new Date();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const formattedDate = `-${mm}-${dd}`;
+        await this.page.waitForLoadState('domcontentloaded');
+    
+        await expect(this.page.getByRole('cell', { name: formattedDate }).nth(2)).toBeVisible();
+        console.log('수납일: ', formattedDate);
+        await expect(this.page.getByRole('cell', { name: `+ ${this.productPrice}`, exact: true })).toBeVisible();
+        console.log('결제 정보 영역 확인');
+    }
+
+    async cancelPayment() {
+        await expect(this.cancelButton).toBeVisible();
+        await this.cancelButton.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        console.log('수납 취소 버튼 선택 확인');
+    }
+
+    async cancelPopup() {
+        await expect(this.cancelInfoText).toBeVisible();
+        await expect(this.confirmButton).toBeVisible();
+        await this.confirmButton.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        console.log('수납 취소 성공 확인');
+    }
+
+    async checkCancelSuccess() {
+        await expect(this.cancelSuccessText).toBeVisible();
+        console.log('수납취소 성공 스낵바 확인');
+    }
+
+    async selectCancelCategory() {
+        await expect(this.cancelCategory).toBeVisible();
+        await this.cancelCategory.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        console.log('수납취소 카테고리 진입 성공 확인');
+    }
+
+    async checkCancelResult() {
+        await expect(this.cancelStatus).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.searchedSurgeryCategory })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.searchedSurgeryName })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.productionName })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.productionNameFree })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: `${this.surgeryPrice} (${this.surgeryVat})` })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: `${this.productPrice} (${this.productPriceVat})` })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: `${this.productFreePrice} (${this.productFreePriceVat})` })).toBeVisible();
+        
+        const regex = new RegExp(`^${this.productPrice.trim()}`);
+        await expect(this.page.getByRole('cell', { name: regex })).toBeVisible();
+        // await expect(this.page.getByRole('cell', { name: this.productPrice, exact: true })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.productFreePrice})).toBeVisible();
+        ///
+        const surgery = Number(this.surgeryPrice.replace(/,/g, ''));
+        const product = Number(this.productPrice.replace(/,/g, ''));
+        const productFree = Number(this.productFreePrice.replace(/,/g, ''));
+
+        const totalPrice = surgery + product + productFree;
+
+        const formattedTotalPrice = totalPrice.toLocaleString();
+        await expect(this.page.getByRole('cell', { name: formattedTotalPrice })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.enteredMemoText })).toBeVisible();
+        const ifNameSame = this.page.getByRole('cell', { name: this.selectedCounselorText });
+        const ifManagerSame = this.page.getByRole('cell', { name: this.selectedManagerText });
+        const nameCount = await ifNameSame.count();
+        const managerCount = await ifManagerSame.count();
+
+        let verified = false;
+        let managerVerified = false;
+
+        if (nameCount > 1) {
+            for (let i = 0; i < nameCount; i++) {
+                const text = await ifNameSame.nth(i).innerText();
+                if (text.trim() === this.selectedDoctorText.trim()) {
+                    await expect(ifNameSame.nth(i)).toBeVisible();
+                    verified = true;
+                    break;
+                }
+            }
+            if (!verified) {
+                console.log(`망했습니다.`);
+            } else {
+                console.log(`이름에 중복값이 있을 경우, 전부 다 잘 들어있어요~`);
+            }
+        } else if (managerCount > 1) {
+            for (let j = 0; j < managerCount; j++) {
+                const text2 = await ifManagerSame.nth(j).innerText();
+                if (text2.trim() === this.selectedManagerText.trim()) {
+                    await expect(ifManagerSame.nth(j)).toBeVisible();
+                    managerVerified = true;
+                    break;
+                }
+            }
+            if (!managerVerified) {
+                console.log('망했어요..');
+            } else {
+                console.log('이름 중복값 다 잘 들어갔어여~~');
+            }
+        } else {
+            await expect(this.page.getByRole('cell', { name: this.selectedCounselorText })).toBeVisible();
+            await expect(this.page.getByRole('cell', { name: this.selectedManagerText })).toBeVisible();
+            console.log('차트 들어간 값들 문제 없어요~~');
+        }  
+        
+    }
+
+    async payAll() {
+        await expect(this.payMethodTitle).toBeVisible();
+        await expect(this.notFreeTitle).toBeVisible();
+        await expect(this.cardTitle).toBeVisible();
+        await expect(this.cardFullAmount).toBeVisible();
+        await this.cardFullAmount.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        console.log('카드 전액 선택 확인 성공');
+        
+        await expect(this.freeTitle).toBeVisible();
+        await expect(this.cashTitle).toBeVisible();
+        await expect(this.cashInput).toBeVisible();
+        await this.cashInput.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        await this.cashInput.type(this.inputCashPrice);
+        await this.page.waitForLoadState('domcontentloaded');
+        console.log('현금 입력 성공 확인');
+
+        // 현금 영수증
+        await expect(this.cashReceipt).toBeVisible();
+        await this.cashReceipt.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        console.log('현금 영수증 선택 성공 확인');
+    }
+
+    async selectPayFullCategory() {
+        await expect(this.payFullCategory).toBeVisible();
+        await this.payFullCategory.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        console.log('완납 카테고리 진입 성공 확인');
+    }
+
+    async checkPayFullInfo() {
+        const today = new Date();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const formattedDate = `-${mm}-${dd}`;
+        await this.page.waitForLoadState('domcontentloaded');
+    
+        await expect(this.page.getByRole('cell', { name: formattedDate }).nth(2)).toBeVisible();
+        console.log('수납일: ', formattedDate);
+        await expect(this.page.getByRole('cell', { name: `+ ${this.productPrice}`, exact: true }).nth(0)).toBeVisible();
+        console.log('결제 정보 영역 확인');
+    }
+
+    async checkPayFullResult() {
+        await expect(this.payFullStatus).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.searchedSurgeryCategory })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.searchedSurgeryName })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.productionName })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.productionNameFree })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: `${this.surgeryPrice} (${this.surgeryVat})` })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: `${this.productPrice} (${this.productPriceVat})` })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: `${this.productFreePrice} (${this.productFreePriceVat})` })).toBeVisible();
+        
+        const regex = new RegExp(`^${this.productPrice.trim()}`);
+        await expect(this.page.getByRole('cell', { name: regex })).toBeVisible();
+        // await expect(this.page.getByRole('cell', { name: this.productPrice, exact: true })).toBeVisible();
+        await expect(this.page.getByRole('cell', { name: this.productFreePrice})).toBeVisible();
+        ///
+        const surgery = Number(this.surgeryPrice.replace(/,/g, ''));
+        const product = Number(this.productPrice.replace(/,/g, ''));
+        const productFree = Number(this.productFreePrice.replace(/,/g, ''));
+
+        const totalPrice = surgery + product + productFree;
+
+        const formattedTotalPrice = totalPrice.toLocaleString();
+        //
+        const ifPriceSame = this.page.getByRole('cell', { name: formattedTotalPrice });
+        const priceCount = await ifPriceSame.count();
+
+        let verify = false;
+
+        if (priceCount > 1) {
+            for (let j = 0; j < priceCount; j++) {
+                const temp = await ifPriceSame.nth(j).innerText();
+                if (temp.trim() === formattedTotalPrice.trim()) {
+                    await expect(ifPriceSame.nth(j)).toBeVisible();
+                    verify = true;
+                    break;
+                }
+            }
+            if (!verify) {
+                console.log('망헀어요...');
+            } else {
+                console.log('청구액이랑 나머지 중복 값들 다 잘 들어가있어요~~~');
+            }
+        } else {
+            await expect(this.page.getByRole('cell', { name: formattedTotalPrice }).first()).toBeVisible();
+            await expect(this.page.getByRole('cell', { name: formattedTotalPrice }).nth(1)).toBeVisible();
+            await expect(this.page.getByRole('cell', { name: formattedTotalPrice }).nth(2)).toBeVisible();
+        }
+
+        await expect(this.page.getByRole('cell', { name: this.enteredMemoText })).toBeVisible();
+        const ifNameSame = this.page.getByRole('cell', { name: this.selectedCounselorText });
         const nameCount = await ifNameSame.count();
 
         let verified = false;
@@ -567,18 +835,6 @@ class Payment {
         }        
     }
 
-    async checkPaymentInfo() {
-        const today = new Date();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        const formattedDate = `-${mm}-${dd}`;
-        await this.page.waitForLoadState('domcontentloaded');
-    
-        await expect(this.page.getByRole('cell', { name: formattedDate }).nth(2)).toBeVisible();
-        console.log('수납일: ', formattedDate);
-        await expect(this.page.getByRole('cell', { name: `+ ${this.productPrice}`, exact: true })).toBeVisible();
-        console.log('결제 정보 영역 확인');
-    }
 
 
 }

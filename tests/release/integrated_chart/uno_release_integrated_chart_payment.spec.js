@@ -98,6 +98,31 @@ test('test', async ({ page }) => {
   await payment.checkUnpaidResult();
   await payment.checkPaymentInfo();
 
+  // 수납취소
+  await payment.hoverOnMemo();
+  await payment.cancelPayment();
+  await payment.cancelPopup();
+  await payment.checkCancelSuccess();
+
+  await payment.checkNoData();
+
+  await payment.selectCancelCategory();
+  await payment.checkCancelResult();
+  await payment.checkPaymentInfo();
+
+  // 완납 ㄱㄱ
+  await payment.hoverOnMemo();
+  await payment.processPayment();
+  await payment.payAll();
+
+  await payment.selectSaveButton();
+  await payment.editInfoModal();
+  await payment.checkEditSuccess();
+
+  await payment.checkNoData();
+
+  await payment.selectPayFullCategory();
+  await payment.checkPayFullResult();
 
 
 
@@ -109,61 +134,6 @@ test('test', async ({ page }) => {
 
 
 
-  // // 결제 영역
-  // await expect(page.getByRole('cell', { name: '수납', exact: true })).toBeVisible();
-  // await expect(page.getByRole('cell', { name: 'v2', exact: true })).toBeVisible(); // 수납자
-  // await expect(page.getByRole('cell', { name: '카드', exact: true })).toBeVisible(); // 결제
-  // await expect(page.getByRole('cell', { name: '-', exact: true })).toBeVisible(); // 카드사/은행명
-  // await expect(page.getByRole('cell', { name: '+ 50,000', exact: true })).toBeVisible(); // 금액
-  // await expect(page.getByRole('cell', { name: '미발행', exact: true })).toBeVisible(); // 현금 영수증
-  // // 마우스 오버
-  // await page.getByRole('cell', { name: '수납메모 > 수납대기 > 미수' }).hover();
-  // await page.getByRole('button', { name: '수납취소' }).nth(1).click();
-  // // 수납 취소
-  // await expect(page.getByText('전체 수납(미수)취소 처리됩니다')).toBeVisible();
-  // await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
-  // await page.getByRole('button', { name: '확인' }).click();
-  // await expect(page.getByText('수납취소 처리되었습니다')).toBeVisible();
-  // // 수납차트 > 미수 확인
-  // await expect(page.getByRole('cell', { name: '등록된 내용이 없습니다' })).toBeVisible();
-  // // 수납차트 > 수납취소 카테고리 이동
-  // await expect(page.getByRole('button', { name: '수납취소' })).toBeVisible();
-  // await page.getByRole('button', { name: '수납취소' }).click();
-  // // 수납취소 상태 확인
-  // await expect(page.getByRole('cell', { name: '수납취소', exact: true })).toBeVisible();
-  // // 마우스 오버
-  // await page.getByRole('cell', { name: '수납메모 > 수납대기 > 미수' }).hover();
-  // await page.getByRole('button', { name: '수납처리' }).click();
-  // // 수납 수정
-  // await expect(page.getByText('수납 수정')).toBeVisible();
-  // // 결제수단 입력
-  // await expect(page.getByText('결제수단 입력')).toBeVisible();
-  // // 과세
-  // await expect(page.getByRole('paragraph').filter({ hasText: /^과세$/ })).toBeVisible();
-  // // 과세 > 카드 > 전액 선택
-  // await page.locator('.sc-eifrsQ').first().click();
-  // // 비과세
-  // await expect(page.getByRole('paragraph').filter({ hasText: '비과세' })).toBeVisible();
-  // // 비과세 > 현금
-  // await page.getByRole('textbox', { name: 'CashPaymentField' }).nth(1).click();
-  // await page.getByRole('textbox', { name: 'CashPaymentField' }).nth(1).fill('750,000');
-  // // 현금영수증 
-  // await expect(page.getByText('현금영수증(계좌이체, 현금)').nth(1)).toBeVisible();
-  // await page.locator('div').filter({ hasText: /^비과세현금영수증\(계좌이체, 현금\)$/ }).getByLabel('현금영수증(계좌이체, 현금)').check();
-  // // 수납메모
-  // await expect(page.getByText('수납메모', { exact: true })).toBeVisible();
-  // await page.locator('pre').getByText('수납메모 > 수납대기 > 미수').click();
-  // await page.locator('pre div').filter({ hasText: '수납메모 > 수납대기 > 미수' }).fill('수납메모 > 수납대기 > 미수 > 완납');
-  // // 저장
-  // await expect(page.getByRole('button', { name: '저장' })).toBeVisible();
-  // await page.getByRole('button', { name: '저장' }).click();
-  // // 저장 안내 팝업
-  // await expect(page.getByText('담당자: 노윤이')).toBeVisible();
-  // await expect(page.getByText('위 내용으로 결산/통계 내용이 업데이트 됩니다')).toBeVisible();
-  // await expect(page.getByRole('button', { name: '확인' })).toBeVisible();
-  // await page.getByRole('button', { name: '확인' }).click();
-  // await expect(page.getByText('수납을 수정했습니다. 연결된 접수정보가 업데이트 됩니다')).toBeVisible();
-  // await expect(page.getByRole('cell', { name: '등록된 내용이 없습니다' })).toBeVisible();
   // // 수납차트 > 완납 선택
   // await expect(page.getByRole('button', { name: '완납' })).toBeVisible();
   // await page.getByRole('button', { name: '완납' }).click();
